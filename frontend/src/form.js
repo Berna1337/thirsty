@@ -1,10 +1,11 @@
 import React from 'react';
 import useFrom from './useForm';
+import validateInfo from './validarinfo';
 
  export const Form = () => {
-    const {handleChange, values} = useFrom();
+    const {handleChange, values, handleSubmit, errors} = useFrom(validateInfo);
   return <div className='.form-content-rigth '>
-      <form className='form'>
+      <form className='form' onSubmit={handleSubmit}>
           <h1>Get started with us today! Creat your account now!</h1>
 
         <div className='form-inputs'>
@@ -21,6 +22,7 @@ import useFrom from './useForm';
           placeholder='Enter your username'
           value={values.username}
           onChange={handleChange}>
+            {errors.username && <p>{errors.username}</p>}
         
           </input>
        </div>
@@ -76,7 +78,7 @@ import useFrom from './useForm';
 
           <input 
           id='password2'
-          type="password2" 
+          type="password" 
           name="password2" 
           className='form-input'
           placeholder='Confirm your password'

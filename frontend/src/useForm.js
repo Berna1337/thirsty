@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
+import validateInfo from "./validarinfo";
 
 
- export const useFrom = () => {
+ export const useFrom = validateInfo  => {
     const [values, setValues] =useState({
         username: '',
         email:'',
@@ -10,7 +11,7 @@ import { useState, useEffect } from "react";
 
 
     })
-    const [errors, setErros] = useState({})
+    const [errors, setErrors] = useState({})
 
     // Quando se alterar algo , esta function vai dar update as valores
 
@@ -23,7 +24,14 @@ import { useState, useEffect } from "react";
             // que estao no form.js caso sejam alterados!
         })
     }
-    return {handleChange, values};
+    
+    const handleSubmit = e =>{
+        e.preventDefault();
+
+        setErrors(validateInfo(values))
+
+    }
+    return {handleChange, values, handleSubmit, errors};
 }
 
 export default useFrom; 
