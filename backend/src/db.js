@@ -56,3 +56,5 @@ async function updateDoc(elem, data) {
     console.log(result)
     return result
 }
+
+module.exports = { createDocument, getCollection, findDocumentById, deleteDocumentById, updateDoc }
