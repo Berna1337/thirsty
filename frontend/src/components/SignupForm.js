@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from './SignupForm.module.css'
+import styles from './Thirsty.module.css'
 
 export function SignupForm ({ onSubmit }) {
 
@@ -104,36 +104,33 @@ const [render, setRender] = useState(false)
 
     return (
         <div>
-            
             <form className={styles.form} method="get" onSubmit={(e) => handleSubmit(e)}>
                 <div className={styles.main}>
                     <h1>Registar</h1>
                     <div className={styles.field}>
                         <label className={styles.section}>Email</label><br></br>
-                        <input className={styles.input} placeholder="someone@example.com" data-testid="email" type="text" onChange={(e) => setSubmit((t) => { return { ...t, email: e.target.value } })}/>
+                        <input className={styles.input} placeholder="someone@example.com" type="text" onChange={(e) => setSubmit((t) => { return { ...t, email: e.target.value } })}/>
                         {render ? emailError(submit.email) : <div className={styles.error}>󠀡󠀡</div>}
                     </div>
                     <div className={styles.field}>
                         <label className={styles.section}>Password</label><br></br>
-                        <input className={styles.input} placeholder="A1b2C3d$" data-testid="password" type={showPass ? "text" : "password"} onChange={(e) => setSubmit((t) => { return { ...t, password: e.target.value } })}/> <button type="button" className={styles.pwbutton} data-testid="password-toggle" onClick={() => setShowPass((e) => !e)}>{!showPass ? <span class="material-icons">visibility</span> : <span class="material-icons">visibility_off</span>}<span className={styles.strength} data-testid="password-strength">{checkPasswordStrength(submit.password)}</span></button>
+                        <input className={styles.input} placeholder="A1b2C3d$" type={showPass ? "text" : "password"} onChange={(e) => setSubmit((t) => { return { ...t, password: e.target.value } })}/> <button type="button" className={styles.pwbutton} onClick={() => setShowPass((e) => !e)}>{!showPass ? <span class="material-icons">visibility</span> : <span class="material-icons">visibility_off</span>}<span className={styles.strength}>{checkPasswordStrength(submit.password)}</span></button>
                         {render ? passError(submit.password) : <div className={styles.error}>󠀡󠀡</div>}
                     </div>
                     <div className={styles.field}>
                         <label className={styles.section}>Confirmar Password</label><br></br>
-                        <input className={styles.input} placeholder="A1b2C3d$" data-testid="passwordConfirmation" type={showPass2 ? "text" : "password"} onChange={(e) => setSubmit((t) => { return { ...t, passwordConfirmation: e.target.value } })}/> <button type="button" className={styles.pwbutton} data-testid="passwordConfirmation-toggle" onClick={() => setShowPass2((e) => !e)}>{!showPass2 ? <span class="material-icons">visibility</span> : <span class="material-icons">visibility_off</span>}</button>
+                        <input className={styles.input} placeholder="A1b2C3d$" type={showPass2 ? "text" : "password"} onChange={(e) => setSubmit((t) => { return { ...t, passwordConfirmation: e.target.value } })}/> <button type="button" className={styles.pwbutton} onClick={() => setShowPass2((e) => !e)}>{!showPass2 ? <span class="material-icons">visibility</span> : <span class="material-icons">visibility_off</span>}</button>
                         {render ? passConfirm(submit.password, submit.passwordConfirmation) : <div className={styles.error}>󠀡󠀡</div>}
                     </div>
                     <div className={styles.field}>
                         <label className={styles.section}>Termos e condições</label><span> </span>
-                        <input className={styles.box} data-testid="acceptsTerms" type="checkbox" onChange={(e) => setSubmit((t) => { return { ...t, acceptsTerms: e.target.checked } })}/>
+                        <input className={styles.box} type="checkbox" onChange={(e) => setSubmit((t) => { return { ...t, acceptsTerms: e.target.checked } })}/>
                         {render ? terms(submit.acceptsTerms) : <div className={styles.error}>󠀡󠀡</div>}
                     </div>
                     <div>
-                        <button type="submit" className={styles.submit} data-testid="submit">Registar</button>
+                        <button type="submit" className={styles.submit}>Registar</button>
                     </div>
-                    
                 </div>
-                
             </form>
         </div>
     )

@@ -1,11 +1,11 @@
 import React from 'react'
-import { Form } from './components/form';
+import { LoginForm } from './components/LoginForm';
 
 
 function App() {
   return (
     <div>
-      <Form />
+      <LoginForm />
     </div>
   );
 }
