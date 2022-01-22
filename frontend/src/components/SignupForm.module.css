@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+body{
+    background: rgb(20,23,26);
+}
+
+.form {
+    width: fit-content;
+    height: fit-content;
+    margin: auto;
+    
+}
+
+.main{
+    border: 3px solid white;
+    border-radius: 20px;
+    padding: 24px;
+    width: fit-content;
+    height: fit-content;
+    background-color: white;
+    box-shadow: 10px 5px 5px black;
+    margin-top: 10vh;
+}
+
+.field {
+    padding: 12px;
+}
+
+.submit{
+    width: 85%;
+    height: 60px;
+    padding: 10px;
+    color: white;
+    background-color: rgb(29,161,242);
+    font-size: larger;
+    border-radius: 25px;
+    border: 0px solid rgb(29,161,242);
+    margin: 1vw;
+    margin-top: 20px;
+    transition: background-color 0.8s;
+    cursor: pointer;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.submit:hover{
+    background-color: rgb(14, 80, 121);
+}
+
+.input {
+    border: hidden;
+    font-size: 16px;
+    height: fit-content;
+    outline: none;
+    padding: 8px;
+    width: 220px;
+}
+
+.section {
+    font-weight: bold;
+}
+
+.box {
+    margin: 10px;
+}
+
+.pwbutton {
+    font-size: xx-large;
+    border: 0px;
+    background-color: white;
+    cursor: pointer;
+    color: rgb(20,23,26);
+}
+
+.error {
+    color: #B00020;
+    width: fit fit-content;
+    height: fit-content;
+    padding: 0px;
+    font-size: 11px;
+    margin: auto;
+    border-radius: 5px;
+    text-align: left;
+    margin-top: 0px;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 3s;
+    -webkit-animation: fadeIn 3s;
+    -moz-animation: fadeIn 3s;
+    -o-animation: fadeIn 3s;
+    -ms-animation: fadeIn 3s;
+    font-family: 'Open Sans', sans-serif;
+}
+
+@keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-moz-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-webkit-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-o-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-ms-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+.strength {
+    font-size: 0px;
+}
