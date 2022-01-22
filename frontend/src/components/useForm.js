@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import validateInfo from "./validarinfo";
+import { validateInfo } from "./validarinfo";
 
 
- export const useFrom = validateInfo  => {
+
+export const useForm = validateInfo  => {
     const [values, setValues] =useState({
         username: '',
         email:'',
@@ -33,5 +34,3 @@ import validateInfo from "./validarinfo";
     }
     return {handleChange, values, handleSubmit, errors};
 }
-
-export default useFrom; 

@@ -1,13 +1,11 @@
 import React from 'react'
-import { Form } from './form';
+import { Form } from './components/form';
 
 
 function App() {
   return (
-    <div className="App">
-      <Form></Form>
-      
-   
+    <div>
+      <Form />
     </div>
   );
 }
