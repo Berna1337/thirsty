@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from './Thirsty.module.css'
+import thirsty from "../test.png"
 
 export function SignupForm ({ onSubmit }) {
 
@@ -106,6 +107,7 @@ const [render, setRender] = useState(false)
         <div>
             <form className={styles.form} method="get" onSubmit={(e) => handleSubmit(e)}>
                 <div className={styles.main}>
+                    <img src={thirsty} className={styles.logo} alt="thirsty" />
                     <h1>Registar</h1>
                     <div className={styles.field}>
                         <label className={styles.section}>Email</label><br></br>
@@ -114,12 +116,12 @@ const [render, setRender] = useState(false)
                     </div>
                     <div className={styles.field}>
                         <label className={styles.section}>Password</label><br></br>
-                        <input className={styles.input} placeholder="A1b2C3d$" type={showPass ? "text" : "password"} onChange={(e) => setSubmit((t) => { return { ...t, password: e.target.value } })}/> <button type="button" className={styles.pwbutton} onClick={() => setShowPass((e) => !e)}>{!showPass ? <span class="material-icons">visibility</span> : <span class="material-icons">visibility_off</span>}<span className={styles.strength}>{checkPasswordStrength(submit.password)}</span></button>
+                        <input className={styles.input} placeholder="A1b2C3d$" type={showPass ? "text" : "password"} onChange={(e) => setSubmit((t) => { return { ...t, password: e.target.value } })}/> <button type="button" className={styles.pwbutton} onClick={() => setShowPass((e) => !e)}>{!showPass ? <span className="material-icons">visibility</span> : <span className="material-icons">visibility_off</span>}<span className={styles.strength}>{checkPasswordStrength(submit.password)}</span></button>
                         {render ? passError(submit.password) : <div className={styles.error}>󠀡󠀡</div>}
                     </div>
                     <div className={styles.field}>
                         <label className={styles.section}>Confirmar Password</label><br></br>
-                        <input className={styles.input} placeholder="A1b2C3d$" type={showPass2 ? "text" : "password"} onChange={(e) => setSubmit((t) => { return { ...t, passwordConfirmation: e.target.value } })}/> <button type="button" className={styles.pwbutton} onClick={() => setShowPass2((e) => !e)}>{!showPass2 ? <span class="material-icons">visibility</span> : <span class="material-icons">visibility_off</span>}</button>
+                        <input className={styles.input} placeholder="A1b2C3d$" type={showPass2 ? "text" : "password"} onChange={(e) => setSubmit((t) => { return { ...t, passwordConfirmation: e.target.value } })}/> <button type="button" className={styles.pwbutton} onClick={() => setShowPass2((e) => !e)}>{!showPass2 ? <span className="material-icons">visibility</span> : <span className="material-icons">visibility_off</span>}</button>
                         {render ? passConfirm(submit.password, submit.passwordConfirmation) : <div className={styles.error}>󠀡󠀡</div>}
                     </div>
                     <div className={styles.field}>
@@ -129,6 +131,7 @@ const [render, setRender] = useState(false)
                     </div>
                     <div>
                         <button type="submit" className={styles.submit}>Registar</button>
+                        <div className={styles.sub}>Já tem conta? Clique aqui!</div>
                     </div>
                 </div>
             </form>

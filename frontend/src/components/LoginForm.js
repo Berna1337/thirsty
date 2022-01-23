@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './Thirsty.module.css'
+import thirsty from "../test.png"
 
 export function LoginForm({ onSubmit }) {
     const [submit, setSubmit] = useState({
@@ -38,8 +39,10 @@ export function LoginForm({ onSubmit }) {
 
     return (
         <div>
+            
             <form className={styles.form} method="get" onSubmit={(e) => handleSubmit(e)}>
                 <div className={styles.main}>
+                    <img src={thirsty} className={styles.logo} alt="thirsty" />
                     <h1>Login</h1>
                     <div className={styles.field}>
                         <label className={styles.section}>Email</label><br></br>
@@ -48,13 +51,15 @@ export function LoginForm({ onSubmit }) {
                     </div>
                     <div className={styles.field}>
                         <label className={styles.section}>Password</label><br></br>
-                        <input className={styles.input} placeholder="A1b2C3d$" type={showPass ? "text" : "password"} onChange={(e) => setSubmit((t) => { return { ...t, password: e.target.value } })}/> <button type="button" className={styles.pwbutton} onClick={() => setShowPass((e) => !e)}>{!showPass ? <span class="material-icons">visibility</span> : <span class="material-icons">visibility_off</span>}</button>
+                        <input className={styles.input} placeholder="A1b2C3d$" type={showPass ? "text" : "password"} onChange={(e) => setSubmit((t) => { return { ...t, password: e.target.value } })}/> <button type="button" className={styles.pwbutton} onClick={() => setShowPass((e) => !e)}>{!showPass ? <span className="material-icons">visibility</span> : <span className="material-icons">visibility_off</span>}</button>
                         {render ? passError(submit.password) : <div className={styles.error}>󠀡󠀡</div>}
                     </div>
                     <div>
                         <button type="submit" className={styles.submit}>Login</button>
+                        <div className={styles.sub}>Ainda não tem conta? Clique aqui!</div>
                     </div>
                 </div>
+                
             </form>
         </div>
     )
