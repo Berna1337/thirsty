@@ -22,15 +22,20 @@ async function createDocument(data) {
     const collection = await getMongoCollection("thirsty", "users")
     const result = await collection.insertOne(data)
     console.log(result)
-    // http://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#~insertOneWriteOpResult
     return result.insertedId
+}
+
+async function createSession(data) {
+    const collection = await getMongoCollection("thirsty", "sessions")
+    const result = await collection.insertOne(data)
+    console.log(result)
+    return result
 }
 
 async function getCollection() {
     const collection = await getMongoCollection("thirsty", "users")
     const result = await collection.find().toArray()
     console.log(result)
-    // http://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#~insertOneWriteOpResult
     return result
 }
 
@@ -40,15 +45,20 @@ async function findDocumentById(id) {
     const doc = await collection.findOne({_id: {$eq:new ObjectId(id)}})
     return doc
 }
+
+async function findDocumentByEmail(email) {
+    const collection = await getMongoCollection("thirsty", "users")
+    const doc = await collection.findOne({email: {$eq:email}})
+    return doc
+}
+
 async function deleteDocumentById(id) {
-    // if(!ObjectId.isValid(id)) return null;
     const collection = await getMongoCollection("thirsty", "users")
     const doc = await collection.deleteOne({_id: {$eq:new ObjectId(id)}})
     return doc
 }
 
 async function updateDoc(elem, data) {
-    // if (!ObjectId.isValid(data.id)) return null
     const collection = await getMongoCollection("thirsty", "users")
     const result = await collection.updateOne(
         elem, {$set: data}
@@ -57,4 +67,4 @@ async function updateDoc(elem, data) {
     return result
 }
 
-module.exports = { createDocument, getCollection, findDocumentById, deleteDocumentById, updateDoc }
+module.exports = { connectToMongo, createDocument, createSession, getCollection, findDocumentById, findDocumentByEmail, deleteDocumentById, updateDoc }

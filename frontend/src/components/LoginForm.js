@@ -13,7 +13,19 @@ export function LoginForm({ onSubmit }) {
 
     function handleSubmit(e) {
         if (!emailError(submit.email) && !passError(submit.password)) {
-            onSubmit(submit)
+            fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(submit)
+            }).then(res => {
+                return res.json()
+            })
+            .then(data => console.log(data))
+            .catch(error => console.log(error))
+            
+            console.log(submit)
         }
         else {
             setRender(true)

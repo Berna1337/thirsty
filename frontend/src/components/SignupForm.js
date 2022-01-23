@@ -2,14 +2,13 @@ import { useState } from "react";
 import styles from './Thirsty.module.css'
 import thirsty from "../test.png"
 
-export function SignupForm ({ onSubmit }) {
+export function SignupForm () {
 
     const [submit, setSubmit] = useState({
     email: '',
     password: '',
     passwordConfirmation: '',
-    acceptsTerms: false,
-    acceptsCommunications: false
+    acceptsTerms: false
 })
 
 const [showPass, setShowPass] = useState(false)
@@ -18,13 +17,27 @@ const [render, setRender] = useState(false)
 
     function handleSubmit(e) {
         if (!emailError(submit.email) && !passError(submit.password) && !passConfirm(submit.password, submit.passwordConfirmation) && !terms(submit.acceptsTerms)) {
-            onSubmit(submit)
+            fetch('/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(submit)
+            }).then(res => {
+                return res.json()
+            })
+            .then(data => console.log(data))
+            .catch(error => console.log(error))
+            
+            console.log(submit)
         }
         else {
             setRender(true)
             e.preventDefault()
         }
     }
+
+
 
     function validateEmail(email) {
         const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
