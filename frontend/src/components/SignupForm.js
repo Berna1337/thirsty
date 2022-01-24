@@ -132,7 +132,7 @@ const [render, setRender] = useState(false)
             <form className={styles.form} method="get" onSubmit={(e) => handleSubmit(e)}>
                 <div className={styles.main}>
                     <img src={thirsty} className={styles.logo} alt="thirsty" />
-                    <h1>Registar</h1>
+                    <h1 className={styles.title}>Registar</h1>
                     <div className={styles.field}>
                         <label className={styles.section}>Email</label><br></br>
                         <input className={styles.input} placeholder="someone@example.com" type="text" onChange={(e) => setSubmit((t) => { return { ...t, email: e.target.value } })}/>
