@@ -9,8 +9,6 @@ export const useForm = validateInfo  => {
         email:'',
         password: '',
         password2:''
-
-
     })
     const [errors, setErrors] = useState({})
 
