@@ -5,6 +5,11 @@ body{
     background: rgb(20,23,26);
 }
 
+.h2{
+    text-align: center;
+    margin-top: 5px;
+    padding-bottom: 7px;
+}
 .nodecor {
     text-decoration: none;
     color: rgb(29,161,242);

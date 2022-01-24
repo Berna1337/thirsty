@@ -1,4 +1,5 @@
-import {useState} from 'react'
+import React, { useState } from 'react';
+import styles from './Thirsty.module.css'
 
 export const Formulario = () => {
 const [userName, setUserName] = useState('')
@@ -10,72 +11,77 @@ const [estiloVida, setEstiloVida] = useState('')
 const [localizacao, setLocalizacao] = useState('')
 
     return (
-        <div>
-            <h2>Formulario</h2>
-            <form>
-
-            <label>UserName: </label>
+    <form className={styles.form}>
+        <div className={styles.main}>
+            <h2 className={styles.h2}>Formulario</h2>
+            
+            <label className={styles.section}>UserName: </label>
             <input 
+                placeholder="Insira o seu Username"
+                className={styles.input}
                 type = "text" 
                 Required
-                maxLength={3}
                 onChange={(e) => setUserName(e.target.value)} 
             />
             <br></br>
         
-            <label>Idade: </label>
+            <label className={styles.section}>Idade: </label>
             <input 
+                placeholder="Insira a sua idade"
+                className={styles.input}
                 type = "number"
                 Required
                 onChange={(e) => setIdade(e.target.value)} 
             />
             <br></br>
 
-            <label>Peso: </label>
+            <label className={styles.section}>Peso(kg): </label>
             <input 
+                placeholder="Insira o seu peso"
+                className={styles.input}
                 type = "number"
                 Required
-                value = {setPeso}
                 onChange={(e) => setPeso(e.target.value)}
             />
             <br></br>
 
-            <label>Altura: </label>
+            <label className={styles.section}>Altura(cm): </label>
             <input 
+                placeholder="Insira a sua altura"
+                className={styles.input}
                 type = "number"
                 Required
-                value = {setIdade}
                 onChange={(e) => setAltura(e.target.value)} 
             />
             <br></br>
 
-            <lable>Sexo: </lable>
-            <select>
-                <option value= "masculino">Masculino</option>
-                <option value = 'femeninio'>Femenino</option>
+            <lable className={styles.section}>Sexo: </lable>
+            <select className={styles.input}>
+                <option value = "masculino" onChange={(e) => setSexo(e.target.value)}>Masculino</option>
+                <option value = 'femeninio' onChange={(e) => setSexo(e.target.value)}>Femenino</option>
             </select>
             <br></br>
 
-            <label>Estilo de vida: </label>
-            <select>
-                <option value= "leve">Atividade Leve</option>
-                <option value = 'moderada'>Atividade Moderada</option>
-                <option value = 'elevada'>Atividade Elevada</option>
-                <option value = 'intensa'>Atividade Intensa</option>
+            <label className={styles.section}>Estilo de vida: </label>
+            <select className={styles.input}>
+                <option value= "leve" onChange={(e) => setEstiloVida(e.target.value)}>Atividade Leve</option>
+                <option value = 'moderada' onChange={(e) => setEstiloVida(e.target.value)}>Atividade Moderada</option>
+                <option value = 'elevada' onChange={(e) => setEstiloVida(e.target.value)}>Atividade Elevada</option>
+                <option value = 'intensa' onChange={(e) => setEstiloVida(e.target.value)}>Atividade Intensa</option>
             </select>
             <br></br>
 
-            <label>Localizacao: </label>
-            <select>
-                <option value= "humido">Climas Frios</option>
-                <option value = 'quente'>Climas Temperados</option>
-                <option value = 'quente'>Climas Quentes</option>
+            <label className={styles.section}>Localizacao: </label>
+            <select className={styles.input}>
+                <option value= "humido" onChange={(e) => setLocalizacao(e.target.value)}>Climas Frios</option>
+                <option value = 'quente' onChange={(e) => setLocalizacao(e.target.value)}>Climas Temperados</option>
+                <option value = 'quente' onChange={(e) => setLocalizacao(e.target.value)}>Climas Quentes</option>
             </select>
             <br></br>
 
-            <p></p>
-            </form>
-        </div>    
+            <button className={styles.submit}>Submit</button>
+        </div>
+    </form>   
     )
 }
 
