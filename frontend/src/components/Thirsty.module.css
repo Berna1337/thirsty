@@ -5,6 +5,11 @@ body{
     background: rgb(20,23,26);
 }
 
+.nodecor {
+    text-decoration: none;
+    color: rgb(29,161,242);
+}
+
 .sub {
     color: black;
     width: fit fit-content;
@@ -38,7 +43,6 @@ body{
     width: fit-content;
     height: fit-content;
     margin: auto;
-    
 }
 
 .main{
@@ -50,6 +54,7 @@ body{
     background-color: white;
     box-shadow: 10px 5px 5px black;
     margin-top: 5vh;
+    margin-bottom: 5vh;
 }
 
 .field {
@@ -61,7 +66,7 @@ body{
     height: 60px;
     padding: 10px;
     color: white;
-    background-color: rgb(20,23,26);
+    background-color: rgb(29,161,242);
     font-size: larger;
     border-radius: 25px;
     border: 0px solid rgb(29,161,242);
@@ -89,6 +94,7 @@ body{
     outline: none;
     padding: 8px;
     width: 220px;
+    margin-left: -8px;
 }
 
 .section {
@@ -96,7 +102,7 @@ body{
 }
 
 .box {
-    margin: 10px;
+    margin-right: 8px;
 }
 
 .pwbutton {

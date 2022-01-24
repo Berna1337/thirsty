@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from './Thirsty.module.css'
-import thirsty from "../test.png"
+import thirsty from "../waterislife.jpg"
 import { Link } from "react-router-dom";
 
 export function SignupForm () {
@@ -10,7 +10,9 @@ export function SignupForm () {
     password: '',
     passwordConfirmation: '',
     acceptsTerms: false,
+    username: '',
     waterData: [],
+    userData: {},
     objective: [],
     achievements: [],
     premium: false,
@@ -24,6 +26,7 @@ const [showPass2, setShowPass2] = useState(false)
 const [render, setRender] = useState(false)
 
     function handleSubmit(e) {
+        e.preventDefault()
         if (!emailError(submit.email) && !passError(submit.password) && !passConfirm(submit.password, submit.passwordConfirmation) && !terms(submit.acceptsTerms)) {
             fetch('/signup', {
                 method: 'POST',
@@ -32,6 +35,7 @@ const [render, setRender] = useState(false)
                 },
                 body: JSON.stringify(submit)
             }).then(res => {
+                console.log(res.status)
                 return res.json()
             })
             .then(data => console.log(data))
@@ -41,7 +45,6 @@ const [render, setRender] = useState(false)
         }
         else {
             setRender(true)
-            e.preventDefault()
         }
     }
 
@@ -68,12 +71,12 @@ const [render, setRender] = useState(false)
     function emailError(email) {
     if (email.length == 0) {
         return (<div className={styles.error}>
-            <span data-testid="email-error">Por favor introduza o seu endereço de email.</span>
+            <span>Por favor introduza o seu endereço de email.</span>
         </div>)
     }
     else if (!validateEmail(email)) {
         return (<div className={styles.error}>
-            <span data-testid="email-error">Por favor introduza um endereço de email válido.</span>
+            <span>Por favor introduza um endereço de email válido.</span>
         </div>
         )
     }
@@ -83,19 +86,19 @@ const [render, setRender] = useState(false)
         if (pass.length == 0) {
             return (
             <div className={styles.error}>
-                <span data-testid="password-error">Por favor introduza a sua password.</span>
+                <span>Por favor introduza a sua password.</span>
             </div>)
         }
         else if (pass.length < 8) {
             return (
             <div className={styles.error}>
-                <span data-testid="password-error">A sua password deve ter no mínimo 8 caracteres.</span>
+                <span>A sua password deve ter no mínimo 8 caracteres.</span>
             </div>)
         }
         else if (checkPasswordStrength(pass) < 4) {
             return (
             <div className={styles.error}>
-                <span data-testid="password-error">A sua password deve ter pelo menos um número, uma mínuscula, uma maiúscula e um símbolo.</span>
+                <span>A sua password deve ter pelo menos um número, uma mínuscula, uma maiúscula e um símbolo.</span>
             </div>)
         }
     }
@@ -104,13 +107,13 @@ const [render, setRender] = useState(false)
         if (pass2.length == 0) {
             return (
                 <div className={styles.error}>
-                    <span data-testid="passwordConfirmation-error">Por favor introduza novamente a sua password.</span>
+                    <span>Por favor introduza novamente a sua password.</span>
                 </div>)
         }
         else if (pass1 != pass2) {
             return (
                 <div className={styles.error}>
-                    <span data-testid="passwordConfirmation-error">As passwords não coincidem.</span>
+                    <span>As passwords não coincidem.</span>
                 </div>)
         }
     }
@@ -119,7 +122,7 @@ const [render, setRender] = useState(false)
         if (!termo) {
             return (
                 <div className={styles.error}>
-                <span data-testid="acceptsTerms-error">Tem de aceitar os termos e condições para criar a sua conta.</span>
+                <span>Tem de aceitar os termos e condições para criar a sua conta.</span>
             </div>)
         }
     }
@@ -146,13 +149,13 @@ const [render, setRender] = useState(false)
                         {render ? passConfirm(submit.password, submit.passwordConfirmation) : <div className={styles.error}>󠀡󠀡</div>}
                     </div>
                     <div className={styles.field}>
-                        <label className={styles.section}>Termos e condições</label><span> </span>
                         <input className={styles.box} type="checkbox" onChange={(e) => setSubmit((t) => { return { ...t, acceptsTerms: e.target.checked } })}/>
+                        <label className={styles.section}>Termos e condições</label><span> </span>
                         {render ? terms(submit.acceptsTerms) : <div className={styles.error}>󠀡󠀡</div>}
                     </div>
                     <div>
                         <button type="submit" className={styles.submit}>Registar</button>
-                        <div className={styles.sub}>Já tem conta? <Link to="/login">Clique aqui!</Link></div>
+                        <div className={styles.sub}>Já tem conta? <Link to="/login" className={styles.nodecor}>Clique aqui</Link>!</div>
                     </div>
                 </div>
             </form>

@@ -78,6 +78,10 @@ app.delete("/delete", (req, res) => {
 
 })
 
+app.get("/api/checkEmail", (req, res) => {
+    const checkEmail = findDocumentByEmail(req.body.email);
+    !checkEmail ? res.status(200).json({message: "Sucess"}) : res.status(400).json({ message: "Email is already registered!" })
+})
 
 
 
