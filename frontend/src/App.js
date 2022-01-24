@@ -9,9 +9,17 @@ function App() {
   const [login, setLogin] = useState(false)
   
   return (
-    <div>
-      <Formulario></Formulario>
-    </div>
+    <BrowserRouter>
+      <div>
+        
+      </div>
+      <Routes>
+        <Route exact path="/" element={<LoginForm />} />
+        <Route path="/signup" element={<SignupForm />} />
+        <Route path="/login" element={<LoginForm />} />
+        <Route path="/form" element={<Formulario />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
