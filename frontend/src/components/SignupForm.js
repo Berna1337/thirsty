@@ -10,7 +10,9 @@ export function SignupForm () {
     password: '',
     passwordConfirmation: '',
     acceptsTerms: false,
+    username: '',
     waterData: [],
+    userData: {},
     objective: [],
     achievements: [],
     premium: false,
@@ -68,12 +70,12 @@ const [render, setRender] = useState(false)
     function emailError(email) {
     if (email.length == 0) {
         return (<div className={styles.error}>
-            <span data-testid="email-error">Por favor introduza o seu endereço de email.</span>
+            <span>Por favor introduza o seu endereço de email.</span>
         </div>)
     }
     else if (!validateEmail(email)) {
         return (<div className={styles.error}>
-            <span data-testid="email-error">Por favor introduza um endereço de email válido.</span>
+            <span>Por favor introduza um endereço de email válido.</span>
         </div>
         )
     }
@@ -83,19 +85,19 @@ const [render, setRender] = useState(false)
         if (pass.length == 0) {
             return (
             <div className={styles.error}>
-                <span data-testid="password-error">Por favor introduza a sua password.</span>
+                <span>Por favor introduza a sua password.</span>
             </div>)
         }
         else if (pass.length < 8) {
             return (
             <div className={styles.error}>
-                <span data-testid="password-error">A sua password deve ter no mínimo 8 caracteres.</span>
+                <span>A sua password deve ter no mínimo 8 caracteres.</span>
             </div>)
         }
         else if (checkPasswordStrength(pass) < 4) {
             return (
             <div className={styles.error}>
-                <span data-testid="password-error">A sua password deve ter pelo menos um número, uma mínuscula, uma maiúscula e um símbolo.</span>
+                <span>A sua password deve ter pelo menos um número, uma mínuscula, uma maiúscula e um símbolo.</span>
             </div>)
         }
     }
@@ -104,13 +106,13 @@ const [render, setRender] = useState(false)
         if (pass2.length == 0) {
             return (
                 <div className={styles.error}>
-                    <span data-testid="passwordConfirmation-error">Por favor introduza novamente a sua password.</span>
+                    <span>Por favor introduza novamente a sua password.</span>
                 </div>)
         }
         else if (pass1 != pass2) {
             return (
                 <div className={styles.error}>
-                    <span data-testid="passwordConfirmation-error">As passwords não coincidem.</span>
+                    <span>As passwords não coincidem.</span>
                 </div>)
         }
     }
@@ -119,7 +121,7 @@ const [render, setRender] = useState(false)
         if (!termo) {
             return (
                 <div className={styles.error}>
-                <span data-testid="acceptsTerms-error">Tem de aceitar os termos e condições para criar a sua conta.</span>
+                <span>Tem de aceitar os termos e condições para criar a sua conta.</span>
             </div>)
         }
     }
