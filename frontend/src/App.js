@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import { BrowserRouter, Route, Routes } from "react-router-dom"
+import React, { useState } from 'react';
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { LoginForm } from './components/LoginForm';
-import { SignupForm } from './components/SignupForm'
+import { SignupForm } from './components/SignupForm';
 
 
 function App() {
@@ -11,11 +11,10 @@ function App() {
   return (
     <BrowserRouter>
       <div>
-        {/* <LoginForm /> */}
-        {/* <SignupForm /> */}
-        {/* {!login ? <LoginForm /> : <SignupForm />} */}
+        
       </div>
       <Routes>
+        <Route exact path="/" element={<LoginForm />} />
         <Route path="/signup" element={<SignupForm />} />
         <Route path="/login" element={<LoginForm />} />
       </Routes>
