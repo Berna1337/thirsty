@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './Thirsty.module.css'
-import thirsty from "../test.png"
+import thirsty from "../waterislife.jpg"
 import { Link } from 'react-router-dom';
 
 export function LoginForm({ onSubmit }) {
@@ -69,7 +69,7 @@ export function LoginForm({ onSubmit }) {
                     </div>
                     <div>
                         <button type="submit" className={styles.submit}>Login</button>
-                        <div className={styles.sub}>Ainda não tem conta? <Link to="/signup">Clique aqui!</Link></div>
+                        <div className={styles.sub}>Ainda não tem conta? <Link to="/signup" className={styles.nodecor}>Clique aqui</Link>!</div>
                     </div>
                 </div>
                 
