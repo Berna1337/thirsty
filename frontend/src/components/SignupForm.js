@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from './Thirsty.module.css'
-import thirsty from "../waterislife.jpg"
+import thirsty from "../Thirsty.png"
 import { Link } from "react-router-dom";
 
 export function SignupForm () {
