@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from './Thirsty.module.css'
 import thirsty from "../test.png"
+import { Link } from "react-router-dom";
 
 export function SignupForm () {
 
@@ -8,7 +9,14 @@ export function SignupForm () {
     email: '',
     password: '',
     passwordConfirmation: '',
-    acceptsTerms: false
+    acceptsTerms: false,
+    waterData: [],
+    objective: [],
+    achievements: [],
+    premium: false,
+    tournament: [],
+    posts: [],
+    karma: 0
 })
 
 const [showPass, setShowPass] = useState(false)
@@ -144,7 +152,7 @@ const [render, setRender] = useState(false)
                     </div>
                     <div>
                         <button type="submit" className={styles.submit}>Registar</button>
-                        <div className={styles.sub}>Já tem conta? Clique aqui!</div>
+                        <div className={styles.sub}>Já tem conta? <Link to="/login">Clique aqui!</Link></div>
                     </div>
                 </div>
             </form>
