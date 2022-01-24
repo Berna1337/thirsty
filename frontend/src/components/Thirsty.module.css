@@ -42,6 +42,8 @@ body{
     margin-left: 12%;
     margin-right: 12%;
     margin-top: 20px;
+    border: 0px solid black;
+    border-radius: 42px;
 }
 
 .form {
@@ -64,6 +66,7 @@ body{
 
 .field {
     padding: 12px;
+    position: relative;
 }
 
 .submit{
@@ -100,6 +103,8 @@ body{
     padding: 8px;
     width: 220px;
     margin-left: -8px;
+    
+
 }
 
 .section {
@@ -116,6 +121,8 @@ body{
     background-color: white;
     cursor: pointer;
     color: rgb(20,23,26);
+    position: absolute;
+    right: 0;
 }
 
 .error {
