@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { LoginForm } from './components/LoginForm';
 import { SignupForm } from './components/SignupForm';
+import Formulario from './components/UserData';
 
 
 function App() {
@@ -9,7 +10,15 @@ function App() {
   const [login, setLogin] = useState(false)
   
   return (
-    <BrowserRouter>
+    <div>
+      <Formulario></Formulario>
+    </div>
+  );
+}
+
+export default App;
+
+/*<BrowserRouter>
       <div>
         
       </div>
@@ -18,8 +27,4 @@ function App() {
         <Route path="/signup" element={<SignupForm />} />
         <Route path="/login" element={<LoginForm />} />
       </Routes>
-    </BrowserRouter>
-  );
-}
-
-export default App;
+    </BrowserRouter>*/
