@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from './Thirsty.module.css'
 import thirsty from "../Thirsty.png"
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 export function SignupForm () {
 
@@ -10,7 +10,6 @@ export function SignupForm () {
     password: '',
     passwordConfirmation: '',
     acceptsTerms: false,
-    username: '',
     waterData: [],
     userData: {},
     objective: [],
@@ -24,6 +23,8 @@ export function SignupForm () {
 const [showPass, setShowPass] = useState(false)
 const [showPass2, setShowPass2] = useState(false)
 const [render, setRender] = useState(false)
+const [check, setCheck] = useState(false)
+const [valid, setValid] = useState(false)
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -36,6 +37,13 @@ const [render, setRender] = useState(false)
                 body: JSON.stringify(submit)
             }).then(res => {
                 console.log(res.status)
+                if (res.status == 400) {
+                    setCheck(true)
+                }
+                if (res.status == 201) {
+                    setCheck(false)
+                    setValid(true)
+                }
                 return res.json()
             })
             .then(data => console.log(data))
@@ -47,8 +55,6 @@ const [render, setRender] = useState(false)
             setRender(true)
         }
     }
-
-
 
     function validateEmail(email) {
         const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -135,8 +141,8 @@ const [render, setRender] = useState(false)
                     <h1 className={styles.title}>Registar</h1>
                     <div className={styles.field}>
                         <label className={styles.section}>Email</label><br></br>
-                        <input className={styles.input} placeholder="someone@example.com" type="text" onChange={(e) => setSubmit((t) => { return { ...t, email: e.target.value } })}/>
-                        {render ? emailError(submit.email) : <div className={styles.error}>󠀡󠀡</div>}
+                        <input className={styles.input} placeholder="someone@example.com" type="text" onChange={(e) => setSubmit((t) => { return { ...t, email: e.target.value.toLowerCase() } })}/>
+                        {render ? emailError(submit.email) : <div className={styles.error}>󠀡󠀡</div>}{check ? <div className={styles.error}>Este email já se encontra registado.</div> : <div className={styles.error}>󠀡󠀡</div>}
                     </div>
                     <div className={styles.field}>
                         <label className={styles.section}>Password</label><br></br>
@@ -159,6 +165,7 @@ const [render, setRender] = useState(false)
                     </div>
                 </div>
             </form>
+            { valid && <Navigate to="/login" />}
         </div>
     )
 }

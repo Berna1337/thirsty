@@ -61,7 +61,7 @@ export function LoginForm({ onSubmit }) {
                     <h1 className={styles.title}>Login</h1>
                     <div className={styles.field}>
                         <label className={styles.section}>Email</label><br></br>
-                        <input className={styles.input} placeholder="someone@example.com" type="text" onChange={(e) => setSubmit((t) => { return { ...t, email: e.target.value } })}/>
+                        <input className={styles.input} placeholder="someone@example.com" type="text" onChange={(e) => setSubmit((t) => { return { ...t, email: e.target.value.toLowerCase() } })}/>
                         {render ? emailError(submit.email) : <div className={styles.error}>󠀡󠀡</div>}
                     </div>
                     <div className={styles.field}>
