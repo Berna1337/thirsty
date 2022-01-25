@@ -8,9 +8,9 @@ export const Formulario = () => {
         age: "",
         weight: "",
         height: "",
-        sex: "",
-        lifestyle: "",
-        clima: ""
+        sex: "masculino",
+        lifestyle: "moderado",
+        clima: "temperado"
     })
 
     const [render, setRender] = useState(false)
@@ -59,7 +59,13 @@ export const Formulario = () => {
         </div>))
         }
 
-        else if (age < 0) {
+        else if (Number(age) < 0) {
+            return (<div className={styles.error}>
+            <span>Por favor introduza uma idade válida.</span>
+        </div>)
+        }
+
+        else if (Number(age) > 130) {
             return (<div className={styles.error}>
             <span>Por favor introduza uma idade válida.</span>
         </div>)
@@ -78,7 +84,13 @@ export const Formulario = () => {
         </div>))
         }
 
-        else if (weight < 0) {
+        else if (Number(weight) < 0) {
+            return (<div className={styles.error}>
+            <span>Por favor introduza um peso válido.</span>
+        </div>)
+        }
+
+        else if (Number(weight) > 600) {
             return (<div className={styles.error}>
             <span>Por favor introduza um peso válido.</span>
         </div>)
@@ -97,7 +109,13 @@ export const Formulario = () => {
         </div>))
         }
 
-        else if (height < 0) {
+        else if (Number(height) < 0) {
+            return (<div className={styles.error}>
+            <span>Por favor introduza uma altura válida.</span>
+        </div>)
+        }
+
+        else if (Number(height) > 300) {
             return (<div className={styles.error}>
             <span>Por favor introduza uma altura válida.</span>
         </div>)
@@ -159,27 +177,27 @@ export const Formulario = () => {
 
             <div className={styles.field}>
                 <label className={styles.section}>Sexo</label><br></br>
-                <select className={styles.options}>
-                    <option value = "masculino" onChange={(e) => setSubmit((t) => { return { ...t, sex: e.target.value } })}>Masculino</option>
-                    <option value = 'femeninio' onChange={(e) => setSubmit((t) => { return { ...t, sex: e.target.value } })}>Femenino</option>
+                <select className={styles.options} value={submit.sex} onChange={(e) => setSubmit((t) => { return { ...t, sex: e.target.value } })}>
+                    <option value = "masculino" >Masculino</option>
+                    <option value = 'femeninio' >Femenino</option>
                 </select>
             </div>
 
             <div className={styles.field}>
                 <label className={styles.section}>Estilo de vida</label><br></br>
-                <select className={styles.options}>
-                    <option value= "leve" onChange={(e) => setSubmit((t) => { return { ...t, lifestyle: e.target.value } })}>Atividade Leve</option>
-                    <option value = 'moderada' onChange={(e) => setSubmit((t) => { return { ...t, lifestyle: e.target.value } })}>Atividade Moderada</option>
-                    <option value = 'elevada' onChange={(e) => setSubmit((t) => { return { ...t, lifestyle: e.target.value } })}>Atividade Elevada</option>
+                <select className={styles.options} value={submit.lifestyle} onChange={(e) => setSubmit((t) => { return { ...t, lifestyle: e.target.value } })}>
+                    <option value= "sedentario" >Sedentário</option>
+                    <option value = 'moderado' >Moderado</option>
+                    <option value = 'ativo' >Ativo</option>
                 </select>
             </div>
 
             <div className={styles.field}>
-                <label className={styles.section}>Localizacao</label><br></br>
-                <select className={styles.options}>
-                    <option value= "humido" onChange={(e) => setSubmit((t) => { return { ...t, clima: e.target.value } })}>Clima Frio</option>
-                    <option value = 'quente' onChange={(e) => setSubmit((t) => { return { ...t, clima: e.target.value } })}>Clima Temperado</option>
-                    <option value = 'quente' onChange={(e) => setSubmit((t) => { return { ...t, clima: e.target.value } })}>Clima Quente</option>
+                <label className={styles.section}>Clima</label><br></br>
+                <select value={submit.clima} className={styles.options} onChange={(e) => setSubmit((t) => { return { ...t, clima: e.target.value } })}>
+                    <option value= "humido" >Clima Frio</option>
+                    <option value = 'temperado' >Clima Temperado</option>
+                    <option value = 'quente'>Clima Quente</option>
                 </select>
             </div>
 
