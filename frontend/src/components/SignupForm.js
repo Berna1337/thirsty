@@ -2,6 +2,7 @@ import { useState } from "react";
 import styles from './Thirsty.module.css'
 import thirsty from "../Thirsty.png"
 import { Link, Navigate, useNavigate } from "react-router-dom";
+import InApp from "./InAppNotification";
 
 export function SignupForm () {
 
@@ -24,7 +25,8 @@ const [showPass, setShowPass] = useState(false)
 const [showPass2, setShowPass2] = useState(false)
 const [render, setRender] = useState(false)
 const [check, setCheck] = useState(false)
-const [valid, setValid] = useState(false)
+const [notificacao, setNoti] = useState()
+const navigate = useNavigate()
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -42,7 +44,10 @@ const [valid, setValid] = useState(false)
                 }
                 if (res.status == 201) {
                     setCheck(false)
-                    setValid(true)
+                    setNoti("Conta criada com sucesso!")
+                    setTimeout(() => {
+                        navigate("/login")
+                    }, 1000);   
                 }
                 return res.json()
             })
@@ -165,7 +170,7 @@ const [valid, setValid] = useState(false)
                     </div>
                 </div>
             </form>
-            { valid && <Navigate to="/login" />}
+            {notificacao && <InApp text = {notificacao}></InApp> }
         </div>
     )
 }
