@@ -13,6 +13,9 @@ export function LoginForm({ onSubmit }) {
     const [render, setRender] = useState(false)
 
     function handleSubmit(e) {
+        
+        e.preventDefault()
+        
         if (!emailError(submit.email) && !passError(submit.password)) {
             fetch('/login', {
                 method: 'POST',
@@ -30,7 +33,6 @@ export function LoginForm({ onSubmit }) {
         }
         else {
             setRender(true)
-            e.preventDefault()
         }
     }
 

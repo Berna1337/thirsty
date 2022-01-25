@@ -5,6 +5,29 @@ body{
     background: rgb(20,23,26);
 }
 
+.desc {
+    color: black;
+    width: fit fit-content;
+    padding: 12px;
+    font-size: 11px;
+    margin: auto;
+    border-radius: 5px;
+    text-align: left;
+    margin-top: -28px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.options {
+    margin-left: -8px;
+    border: hidden;
+    font-size: 16px;
+    height: fit-content;
+    outline: none;
+    padding: 4px;
+    margin-top: 4px;
+    width: 100%;
+}
+
 .title {
     padding: 12px;
 }
@@ -108,8 +131,6 @@ body{
     padding: 8px;
     width: 220px;
     margin-left: -8px;
-    
-
 }
 
 .section {
