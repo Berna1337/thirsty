@@ -47,7 +47,7 @@ const navigate = useNavigate()
                     setNoti("Conta criada com sucesso!")
                     setTimeout(() => {
                         navigate("/login")
-                    }, 1000);   
+                    }, 10000);   
                 }
                 return res.json()
             })

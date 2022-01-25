@@ -26,7 +26,10 @@ export function LoginForm({ onSubmit }) {
             }).then(res => {
                 return res.json()
             })
-            .then(data => console.log(data))
+            .then(data => {
+                console.log(data)
+                localStorage.setItem("token", data.token)
+            })
             .catch(error => console.log(error))
             
             console.log(submit)

@@ -13,5 +13,5 @@ class InApp extends Component {
         );
     }
 }
- 
+
 export default InApp;

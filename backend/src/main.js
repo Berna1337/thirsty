@@ -48,6 +48,14 @@ app.post("/login", async (req, res) => {
         delete user.password
         delete user.passwordConfirmation
         delete user.acceptsTerms
+        delete user.waterData
+        delete user.userData
+        delete user.objective
+        delete user.achievements
+        delete user.premium
+        delete user.tournament
+        delete user.posts
+        delete user.karma
         await createSession({token, ...user})
         res.status(200).json({token})
     }  
@@ -118,6 +126,5 @@ async function validatePassword(email, password) {
 }
 
 async function generateToken(email) {
-    const user = await findDocumentByEmail(email)
-    return ObjectId(user._id)
+    return String(new ObjectId())
 }
