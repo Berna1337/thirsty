@@ -3,6 +3,8 @@ const { MongoClient, ObjectId } = require('mongodb')
 const express = require("express")
 const app = express()
 const port = process.env.PORT ?? 3025
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 connectToMongo()
 
@@ -12,8 +14,12 @@ app.listen(port, () => console.log(`À escuta em http://localhost:${port}`));
 
 app.post("/signup", async (req, res) => {
     if (validateEmail(req.body.email) && await emailAvaiable(req.body.email) && (checkPasswordStrength(req.body.password) === 4) && (req.body.password == req.body.passwordConfirmation) && req.body.acceptsTerms) {
+        const user = req.body
+        const passEncrypted = bcrypt.hashSync(req.body.password, saltRounds);
+        user.password = passEncrypted
+        delete user.passwordConfirmation
         const id = new ObjectId()
-        await createDocument({_id: id, ...req.body})
+        await createDocument({_id: id, ...user})
         console.log(id)
         res.status(201).json({ message: "Utilizador Criado com Sucesso!", _id: id})
     }
@@ -117,7 +123,7 @@ function checkPasswordStrength(password) {
 
 async function validateLogin(email, password) {
     const user = await findDocumentByEmail(email)
-    return user.email == email && user.password == password ? true : false
+    return bcrypt.compareSync(password, user.password);
 }
 
 async function validatePassword(email, password) {
