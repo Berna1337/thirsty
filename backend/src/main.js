@@ -1,4 +1,4 @@
-const { connectToMongo, createDocument, createSession, getCollection, findDocumentById, deleteDocumentById, updateDoc, findDocumentByEmail } = require("./db")
+const { connectToMongo, createDocument, createSession, getCollection, findDocumentById, deleteDocumentById, updateDoc, findDocumentByEmail, findSessionByEmail, findSessionByToken, deleteSessionByEmail } = require("./db")
 const { MongoClient, ObjectId } = require('mongodb')
 const express = require("express")
 const app = express()
@@ -16,6 +16,7 @@ app.post("/signup", async (req, res) => {
     if (validateEmail(req.body.email) && await emailAvaiable(req.body.email) && (checkPasswordStrength(req.body.password) === 4) && (req.body.password == req.body.passwordConfirmation) && req.body.acceptsTerms) {
         const user = req.body
         const passEncrypted = bcrypt.hashSync(req.body.password, saltRounds);
+        user.email = user.email.toLowerCase()
         user.password = passEncrypted
         delete user.passwordConfirmation
         const id = new ObjectId()
@@ -49,8 +50,9 @@ app.post("/signup", async (req, res) => {
 app.post("/login", async (req, res) => {
     if (await emailAvaiable(req.body.email)) res.status(404).json({ message: "O email ou password estão incorretos" })
     else if (await validateLogin(req.body.email, req.body.password)) {
+        await handleSessions(req.body.email)
         const user = await findDocumentByEmail(req.body.email)
-        const token = await generateToken(req.body.email)
+        const token = await generateToken()
         delete user.password
         delete user.passwordConfirmation
         delete user.acceptsTerms
@@ -68,27 +70,58 @@ app.post("/login", async (req, res) => {
     else if (validatePassword(req.body.email, req.body.password)) res.status(401).json({ message: "O email ou password estão incorretos" })
 })
 
-app.post("/submitForm", (req, res) => {
+// app.use("/", async function (req, res, next) {
+//     const checkToken = await findSessionByToken(req.headers.authorization)
+//     if (!checkToken) res.status(404).json({ message: "Não existe nenhuma sessão com este token."})
+//     next()
+// })
+
+app.get("/user", async (req, res) => {
+    const checkToken = await findSessionByToken(req.headers.authorization)
+    if (!checkToken) res.status(403).json({ message: "Não existe nenhuma sessão com este token."})
+    else res.sendStatus(200)
+})
+
+app.post("/api/submitForm", async (req, res) => {
+    const resposta = {
+        message: "Os dados introduzidos não são válidos.",
+        errors: {
+
+        }
+    }
+    if (req.body.name.length == 0) resposta.errors.name = "Por favor introduza o seu nome."
+    if (req.body.age.length == 0 || Number(req.body.age) < 0 || Number(req.body.age) > 130) resposta.errors.age = "Por favor introduza uma idade válida."
+    if (req.body.weight.length == 0 || Number(req.body.weight) < 0 || Number(req.body.weight) > 600) resposta.errors.weight = "Por favor introduza um peso válido."
+    if (req.body.height.length == 0 || Number(req.body.height) < 0 || Number(req.body.height) > 300) resposta.errors.weight = "Por favor introduza um peso válido."
+    if (Object.keys(resposta.errors).length == 0) {
+        const session = await findSessionByToken(req.headers.authorization)
+        const user = await findDocumentByEmail(session.email)
+        const obj = {userData: {...req.body}}
+        const update = await updateDoc(user, obj)
+        return update
+    }
+    else {
+        res.status(400).json(resposta)
+    }
+})
+
+app.post("/api/submitWater", (req, res) => {
 
 })
 
-app.post("/submitWater", (req, res) => {
+app.get("/api/objective", (req, res) => {
 
 })
 
-app.get("/objective", (req, res) => {
+app.post("/api/post", (req, res) => {
 
 })
 
-app.post("/post", (req, res) => {
+app.get("/api/allmydata", (req, res) => {
 
 })
 
-app.get("/allmydata", (req, res) => {
-
-})
-
-app.delete("/delete", (req, res) => {
+app.delete("/api/delete", (req, res) => {
 
 })
 
@@ -131,6 +164,13 @@ async function validatePassword(email, password) {
     return user.email == email && user.password != password ? true : false
 }
 
-async function generateToken(email) {
+async function generateToken() {
     return String(new ObjectId())
+}
+
+async function handleSessions(email) {
+    const existeSession = await findSessionByEmail(email)
+    if (existeSession) {
+        await deleteSessionByEmail(email)
+    }
 }

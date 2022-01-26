@@ -52,6 +52,24 @@ async function findDocumentByEmail(email) {
     return doc
 }
 
+async function findSessionByEmail(email) {
+    const collection = await getMongoCollection("thirsty", "sessions")
+    const doc = await collection.findOne({email: {$eq:email}})
+    return doc
+}
+
+async function findSessionByToken(token) {
+    const collection = await getMongoCollection("thirsty", "sessions")
+    const doc = await collection.findOne({token: {$eq:token}})
+    return doc
+}
+
+async function deleteSessionByEmail(email) {
+    const collection = await getMongoCollection("thirsty", "sessions")
+    const doc = await collection.deleteOne({email: {$eq:email}})
+    return doc
+}
+
 async function deleteDocumentById(id) {
     const collection = await getMongoCollection("thirsty", "users")
     const doc = await collection.deleteOne({_id: {$eq:new ObjectId(id)}})
@@ -67,4 +85,4 @@ async function updateDoc(elem, data) {
     return result
 }
 
-module.exports = { connectToMongo, createDocument, createSession, getCollection, findDocumentById, findDocumentByEmail, deleteDocumentById, updateDoc }
+module.exports = { connectToMongo, createDocument, createSession, getCollection, findDocumentById, findDocumentByEmail, findSessionByEmail, findSessionByToken, deleteSessionByEmail, deleteDocumentById, updateDoc }

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import styles from './Thirsty.module.css'
 
-export const Formulario = () => {
+export const Formulario = (props) => {
 
+    let token = props.token
+    console.log(token)
     const [submit, setSubmit] = useState({
         name: "",
         age: "",
@@ -20,10 +22,11 @@ export const Formulario = () => {
         e.preventDefault()
         
         if (!nameError(submit.name) && !ageError(submit.age) && !weightError(submit.weight) && !heightError(submit.height)) {
-            fetch('/submitForm', {
+            fetch('/api/submitForm', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `${token}`
                 },
                 body: JSON.stringify(submit)
             }).then(res => {

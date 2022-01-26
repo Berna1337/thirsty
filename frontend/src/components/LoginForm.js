@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Thirsty.module.css'
 import thirsty from "../Thirsty.png"
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export function LoginForm({ onSubmit }) {
     const [submit, setSubmit] = useState({
@@ -11,6 +11,8 @@ export function LoginForm({ onSubmit }) {
 
     const [showPass, setShowPass] = useState(false)
     const [render, setRender] = useState(false)
+    const [notificacao, setNoti] = useState()
+    const navigate = useNavigate()
 
     function handleSubmit(e) {
         
@@ -24,11 +26,17 @@ export function LoginForm({ onSubmit }) {
                 },
                 body: JSON.stringify(submit)
             }).then(res => {
+                if (res.status == 201) {
+                    setNoti("Conta criada com sucesso!") 
+                }
                 return res.json()
             })
             .then(data => {
                 console.log(data)
                 localStorage.setItem("token", data.token)
+                setTimeout(() => {
+                        navigate("/profile")
+                    }, 1000);  
             })
             .catch(error => console.log(error))
             

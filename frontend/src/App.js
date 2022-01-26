@@ -3,35 +3,56 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { LoginForm } from './components/LoginForm';
 import { SignupForm } from './components/SignupForm';
 import Formulario from './components/UserData';
+import Dashboard from './components/Dashboard';
 
 function App() {
   
   const [login, setLogin] = useState(false)
   
+  function tokenFromLocal() {
+    const token = localStorage.getItem("token")
+    return token;
+  }
+
+  function checkAuth(token) {
+    fetch('/user', {
+      method: 'GET',
+      headers: {
+      'Authorization': `${token}`
+      },
+    }).then(res => {
+      if (res.status == 200) {
+        setLogin(true)
+      }
+      else if (res.status == 403) {
+        setLogin(false)
+      }
+    })
+    .catch(error => console.log(error))
+  }
+
+  const userToken = tokenFromLocal()
+  checkAuth(userToken)
+
+  setInterval(() => {
+    const userToken = tokenFromLocal()
+    checkAuth(userToken)
+  }, 4200);
+
   return (
     <BrowserRouter>
       <div>
-        
+        {String(login)}
       </div>
       <Routes>
-        <Route exact path="/" element={<LoginForm />} />
-        <Route path="/signup" element={<SignupForm />} />
-        <Route path="/login" element={<LoginForm />} />
-        <Route path="/form" element={<Formulario />} />
+        <Route exact path="/" element={login ? <Dashboard token={userToken}/> : <LoginForm />} />
+        <Route path="/signup" element={login ? <Dashboard token={userToken}/> : <SignupForm />} />
+        <Route path="/login" element={login ? <Dashboard token={userToken}/> : <LoginForm />} />
+        <Route path="/profile" element={login ? <Formulario token={userToken}/> : <LoginForm />} />
+        <Route path="/dashboard" element={login ? <Dashboard token={userToken}/> : <LoginForm />} />
       </Routes>
     </BrowserRouter>
   );
 }
 
 export default App;
-
-/*<BrowserRouter>
-      <div>
-        
-      </div>
-      <Routes>
-        <Route exact path="/" element={<LoginForm />} />
-        <Route path="/signup" element={<SignupForm />} />
-        <Route path="/login" element={<LoginForm />} />
-      </Routes>
-    </BrowserRouter>*/

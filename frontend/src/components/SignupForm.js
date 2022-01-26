@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from './Thirsty.module.css'
 import thirsty from "../Thirsty.png"
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import InApp from "./InAppNotification";
 
 export function SignupForm () {
@@ -12,7 +12,7 @@ export function SignupForm () {
     passwordConfirmation: '',
     acceptsTerms: false,
     waterData: [],
-    userData: {},
+    userData: "",
     objective: [],
     achievements: [],
     premium: false,
