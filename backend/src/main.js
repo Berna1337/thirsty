@@ -78,26 +78,26 @@ app.post("/login", async (req, res) => {
 
 app.get("/user", async (req, res) => {
     const checkToken = await findSessionByToken(req.headers.authorization)
+    // req.user = await findDocumentById(checkToken._id)
     if (!checkToken) res.status(403).json({ message: "Não existe nenhuma sessão com este token."})
     else res.sendStatus(200)
 })
 
-app.post("/api/submitForm", async (req, res) => {
+app.post("/api/submitForm", Authorize, async (req, res) => {
     const resposta = {
         message: "Os dados introduzidos não são válidos.",
         errors: {
 
         }
     }
+    console.log(req.user)
     if (req.body.name.length == 0) resposta.errors.name = "Por favor introduza o seu nome."
     if (req.body.age.length == 0 || Number(req.body.age) < 0 || Number(req.body.age) > 130) resposta.errors.age = "Por favor introduza uma idade válida."
     if (req.body.weight.length == 0 || Number(req.body.weight) < 0 || Number(req.body.weight) > 600) resposta.errors.weight = "Por favor introduza um peso válido."
     if (req.body.height.length == 0 || Number(req.body.height) < 0 || Number(req.body.height) > 300) resposta.errors.weight = "Por favor introduza um peso válido."
     if (Object.keys(resposta.errors).length == 0) {
-        const session = await findSessionByToken(req.headers.authorization)
-        const user = await findDocumentByEmail(session.email)
         const obj = {userData: {...req.body}}
-        const update = await updateDoc(user, obj)
+        const update = await updateDoc(req.user, obj)
         return update
     }
     else {
@@ -105,25 +105,20 @@ app.post("/api/submitForm", async (req, res) => {
     }
 })
 
-app.get("/api/checkProfile", async (req, res) => {
-    const user = await findDocumentByEmail(req.body.email)
-    !user.userData ? res.status(404).json({ message: "Os dados do Perfil não se encontram preenchidos."}) : res.sendStatus(200)
+app.get("/api/checkProfile", Authorize, async (req, res) => {
+    // const user = await findDocumentByEmail(req.body.email)
+    !req.user.userData ? res.status(404).json({ message: "Os dados do Perfil não se encontram preenchidos."}) : res.sendStatus(200)
 })
 
-app.post("/api/submitWater", async (req, res) => {
-    const session = await findSessionByToken(req.headers.authorization)
-    const user = await findDocumentByEmail(session.email)
-    if (!session) res.sendStatus(403)
-    else {
-        const obj = {waterData: {...req.body}}
-        const pushWater = await addWater(user, obj)
-        res.sendStatus(201)
-        return pushWater
-    }
+app.post("/api/submitWater", Authorize, async (req, res) => {
+    const obj = {waterData: {...req.body}}
+    const pushWater = await addWater(req.user, obj)
+    res.sendStatus(201)
+    return pushWater
 })
 
 app.get("/api/getWater", async (req, res) => {
-    
+
 })
 
 app.get("/api/objective", (req, res) => {
@@ -146,7 +141,12 @@ app.delete("/api/delete", (req, res) => {
 
 
 
-
+async function Authorize(req, res, next) {
+    const checkToken = await findSessionByToken(req.headers.authorization)
+    if (!checkToken) res.status(403).json({ message: "Não existe nenhuma sessão com este token."})
+    req.user = await findDocumentById(checkToken._id)
+    next()
+}
 
 function validateEmail(email) {
     const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/

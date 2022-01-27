@@ -23,27 +23,30 @@ function App() {
     }).then(res => {
       if (res.status == 200) {
         setLogin(true)
+        return
       }
       else if (res.status == 403) {
         setLogin(false)
+        return
       }
     })
     .catch(error => console.log(error))
   }
-
+  
   const userToken = tokenFromLocal()
   checkAuth(userToken)
 
   setInterval(() => {
     const userToken = tokenFromLocal()
     checkAuth(userToken)
-  }, 4200);
-
+  }, 4224);
+  
   return (
     <BrowserRouter>
       <div>
         {String(login)}
       </div>
+      
       <Routes>
         <Route exact path="/" element={login ? <Dashboard token={userToken}/> : <LoginForm />} />
         <Route path="/signup" element={login ? <Dashboard token={userToken}/> : <SignupForm />} />

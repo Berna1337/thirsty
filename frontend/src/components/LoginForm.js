@@ -34,13 +34,15 @@ export function LoginForm() {
             .then(data => {
                 console.log(data)
                 localStorage.setItem("token", data.token)
-                setTimeout(() => {
-                        navigate("/profile")
-                    }, 1000);  
+                // setTimeout(() => {
+                //         navigate("/profile")
+                //     }, 1000);  
             })
             .catch(error => console.log(error))
             
+            
             console.log(submit)
+            navigate("/dashboard")
         }
         else {
             setRender(true)

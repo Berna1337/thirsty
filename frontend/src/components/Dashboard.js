@@ -4,7 +4,9 @@ import { Link, useNavigate } from 'react-router-dom';
 
 export default function Dashboard(props) {
   
+  const navigate = useNavigate()
   let token = props.token
+  let name = props.name
   console.log(token)
 
   const [water, setWater] = useState(0)
@@ -19,20 +21,38 @@ export default function Dashboard(props) {
                 body: JSON.stringify({value: quant, date: String(new Date())})
             }).then(res => {
                 if (res.status == 201) {
-                    setWater(e => e + quant) 
+                    setWater(e => e + quant)
+                    return 
                 }
                 return res.json()
             })
-            .then(data => {
-                console.log(data) 
+            .catch(error => console.log(error))
+  }
+
+  function checkProfile() {
+    fetch('/api/checkProfile', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `${token}`
+                }
+            }).then(res => {
+                if (res.status == 404) {
+                    navigate("/profile")
+                    console.log("aqui")
+                    return
+                }
+                return res.json()
             })
             .catch(error => console.log(error))
   }
+
+  checkProfile()
   
   return (<div>
     <div className={styles.form}>
       <div className={styles.main}>
-        <h1 className={styles.title}>Welcome {props.name},</h1>
+        <h1 className={styles.title}>Welcome {name},</h1>
 
         <h2 className={styles.subtitle}>Objetivo do dia:</h2>
         <div>{water}</div>
