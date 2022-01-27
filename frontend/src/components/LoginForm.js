@@ -3,7 +3,7 @@ import styles from './Thirsty.module.css'
 import thirsty from "../Thirsty.png"
 import { Link, useNavigate } from 'react-router-dom';
 
-export function LoginForm({ onSubmit }) {
+export function LoginForm() {
     const [submit, setSubmit] = useState({
         email: "",
         password: ""

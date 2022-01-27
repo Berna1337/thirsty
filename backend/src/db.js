@@ -85,4 +85,13 @@ async function updateDoc(elem, data) {
     return result
 }
 
-module.exports = { connectToMongo, createDocument, createSession, getCollection, findDocumentById, findDocumentByEmail, findSessionByEmail, findSessionByToken, deleteSessionByEmail, deleteDocumentById, updateDoc }
+async function addWater(elem, data) {
+    const collection = await getMongoCollection("thirsty", "users")
+    const result = await collection.updateOne(
+        elem, {$push: data}
+    )
+    console.log(result)
+    return result
+}
+
+module.exports = { connectToMongo, createDocument, createSession, getCollection, findDocumentById, findDocumentByEmail, findSessionByEmail, findSessionByToken, deleteSessionByEmail, deleteDocumentById, updateDoc, addWater }

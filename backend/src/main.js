@@ -1,4 +1,4 @@
-const { connectToMongo, createDocument, createSession, getCollection, findDocumentById, deleteDocumentById, updateDoc, findDocumentByEmail, findSessionByEmail, findSessionByToken, deleteSessionByEmail } = require("./db")
+const { connectToMongo, createDocument, createSession, getCollection, findDocumentById, deleteDocumentById, updateDoc, findDocumentByEmail, findSessionByEmail, findSessionByToken, deleteSessionByEmail, addWater } = require("./db")
 const { MongoClient, ObjectId } = require('mongodb')
 const express = require("express")
 const app = express()
@@ -107,11 +107,23 @@ app.post("/api/submitForm", async (req, res) => {
 
 app.get("/api/checkProfile", async (req, res) => {
     const user = await findDocumentByEmail(req.body.email)
-    !user.userData ? res.status(404).json({ message: "Os dados do Perfil ainda não"}) : res.sendStatus(200)
+    !user.userData ? res.status(404).json({ message: "Os dados do Perfil não se encontram preenchidos."}) : res.sendStatus(200)
 })
 
-app.post("/api/submitWater", (req, res) => {
+app.post("/api/submitWater", async (req, res) => {
+    const session = await findSessionByToken(req.headers.authorization)
+    const user = await findDocumentByEmail(session.email)
+    if (!session) res.sendStatus(403)
+    else {
+        const obj = {waterData: {...req.body}}
+        const pushWater = await addWater(user, obj)
+        res.sendStatus(201)
+        return pushWater
+    }
+})
 
+app.get("/api/getWater", async (req, res) => {
+    
 })
 
 app.get("/api/objective", (req, res) => {
