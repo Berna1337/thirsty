@@ -105,6 +105,11 @@ app.post("/api/submitForm", async (req, res) => {
     }
 })
 
+app.get("/api/checkProfile", async (req, res) => {
+    const user = await findDocumentByEmail(req.body.email)
+    !user.userData ? res.status(404).json({ message: "Os dados do Perfil ainda não"}) : res.sendStatus(200)
+})
+
 app.post("/api/submitWater", (req, res) => {
 
 })
