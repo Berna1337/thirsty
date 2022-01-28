@@ -18,13 +18,33 @@ export default function Dashboard(props) {
                     'Content-Type': 'application/json',
                     'Authorization': `${token}`
                 },
-                body: JSON.stringify({value: quant, date: String(new Date())})
+                body: JSON.stringify({value: quant, date: String(new Date()).slice(0, 15)})
             }).then(res => {
                 if (res.status == 201) {
                     setWater(e => e + quant)
                     return 
                 }
                 return res.json()
+            })
+            .catch(error => console.log(error))
+  }
+
+  function getWater() {
+    fetch('/api/getWater', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `${token}`
+                }
+            }).then(res => {
+                // if (res.status == 201) {
+                //     setWater(e => e + quant)
+                //     return 
+                // }
+                return res.json()
+            })
+            .then(data => {
+                setWater(data)
             })
             .catch(error => console.log(error))
   }
@@ -48,6 +68,7 @@ export default function Dashboard(props) {
   }
 
   checkProfile()
+  getWater()
   
   return (<div>
     <div className={styles.form}>
@@ -76,8 +97,6 @@ export default function Dashboard(props) {
             </div>
           </div>
         </div>
-
-
       </div>
     </div>
   </div>);

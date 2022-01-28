@@ -117,8 +117,11 @@ app.post("/api/submitWater", Authorize, async (req, res) => {
     return pushWater
 })
 
-app.get("/api/getWater", async (req, res) => {
-
+app.get("/api/getWater", Authorize, async (req, res) => {
+    const hoje = String(new Date()).slice(0, 15)
+    const consumoDia = req.user.waterData.filter(e => e.date == hoje)
+    const resposta = consumoDia.reduce((acc, e) => acc + e.value, 0)
+    res.status(200).json(resposta)
 })
 
 app.get("/api/objective", (req, res) => {
