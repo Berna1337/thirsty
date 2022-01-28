@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { LoginForm } from './components/LoginForm';
 import { SignupForm } from './components/SignupForm';
@@ -34,12 +34,19 @@ function App() {
   }
   
   const userToken = tokenFromLocal()
-  checkAuth(userToken)
+  
 
-  setInterval(() => {
-    const userToken = tokenFromLocal()
+  useEffect(() => {
     checkAuth(userToken)
+    setInterval(() => {
+      const userToken = tokenFromLocal()
+      checkAuth(userToken)
   }, 4224);
+    
+  }, []);
+  
+
+  
   
   return (
     <BrowserRouter>

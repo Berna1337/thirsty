@@ -108,7 +108,7 @@ app.post("/api/submitForm", Authorize, async (req, res) => {
 
 app.get("/api/checkProfile", Authorize, async (req, res) => {
     // const user = await findDocumentByEmail(req.body.email)
-    !req.user.userData ? res.status(404).json({ message: "Os dados do Perfil não se encontram preenchidos."}) : res.sendStatus(200)
+    !req.user.userData ? res.status(404).json({ message: "Os dados do Perfil não se encontram preenchidos."}) : res.status(200).json(req.user.userData)
 })
 
 app.post("/api/submitWater", Authorize, async (req, res) => {

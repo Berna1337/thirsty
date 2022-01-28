@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Thirsty.module.css'
 import { useNavigate } from 'react-router-dom';
 
 export const Formulario = (props) => {
+
 
     let token = props.token
     console.log(token)
@@ -18,6 +19,32 @@ export const Formulario = (props) => {
 
     const navigate = useNavigate()
     const [render, setRender] = useState(false)
+
+    useEffect(() => {
+    checkProfile()
+    
+    }, []);
+    
+    function checkProfile() {
+    fetch('/api/checkProfile', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `${token}`
+                }
+            }).then(res => {
+                if (res.status == 404) {
+                    return
+                }
+                return res.json()
+            })
+            .then(data => {
+                if (!data) return
+                else setSubmit(data)
+                return data
+            })
+            .catch(error => console.log(error))
+    }
 
     function handleSubmit(e) {
         
@@ -131,6 +158,7 @@ export const Formulario = (props) => {
     }
 
     return (
+
     <form className={styles.form} method="get" onSubmit={(e) => handleSubmit(e)}>
         <div className={styles.main}>
             <h1 className={styles.title}>Perfil</h1>
@@ -141,7 +169,8 @@ export const Formulario = (props) => {
                 <input 
                     placeholder="Insira o seu nome"
                     className={styles.input}
-                    type = "text" 
+                    type = "text"
+                    value={submit.name}
                     // required
                     onChange={(e) => setSubmit((t) => { return { ...t, name: e.target.value } })} 
                 />
@@ -153,6 +182,7 @@ export const Formulario = (props) => {
                     placeholder="Insira a sua idade"
                     className={styles.input}
                     type = "number"
+                    value={submit.age}
                     // required
                     onChange={(e) => setSubmit((t) => { return { ...t, age: e.target.value } })} 
                 />
@@ -165,6 +195,7 @@ export const Formulario = (props) => {
                     placeholder="Insira o seu peso"
                     className={styles.input}
                     type = "number"
+                    value={submit.weight}
                     // required
                     onChange={(e) => setSubmit((t) => { return { ...t, weight: e.target.value } })}
                 />
@@ -177,6 +208,7 @@ export const Formulario = (props) => {
                     placeholder="Insira a sua altura"
                     className={styles.input}
                     type = "number"
+                    value={submit.height}
                     // required
                     onChange={(e) => setSubmit((t) => { return { ...t, height: e.target.value } })} 
                 />
