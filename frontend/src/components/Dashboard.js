@@ -10,6 +10,7 @@ export default function Dashboard(props) {
 
   const [water, setWater] = useState(0)
   const [name, setName] = useState("")
+  const [objective, setObjective] = useState(2300)
 
   function addWater(quant) {
     fetch('/api/submitWater', {
@@ -49,6 +50,26 @@ export default function Dashboard(props) {
             .catch(error => console.log(error))
   }
 
+  function getObjective() {
+    fetch('/api/objective', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `${token}`
+                }
+            }).then(res => {
+                // if (res.status == 201) {
+                //     setWater(e => e + quant)
+                //     return 
+                // }
+                return res.json()
+            })
+            .then(data => {  
+              setObjective(data)
+            })
+            .catch(error => console.log(error))
+  }
+
   function getWater() {
     fetch('/api/getWater', {
                 method: 'GET',
@@ -79,12 +100,12 @@ export default function Dashboard(props) {
             }).then(res => {
                 if (res.status == 404) {
                     navigate("/profile")
-                    console.log("aqui")
                     return
                 }
                 getName()
+                getObjective()
                 getWater()
-                return res.json()
+                return
             })
             .catch(error => console.log(error))
   }
@@ -102,7 +123,7 @@ export default function Dashboard(props) {
         <h1 className={styles.title}>Welcome {name},</h1>
 
         <h2 className={styles.subtitle}>Objetivo do dia:</h2>
-        <div>{water} / TBD</div>
+        <div>{water}ml / {objective}ml</div>
 
 
         <h2 className={styles.subtitle}>Log your Water!</h2>
@@ -123,6 +144,19 @@ export default function Dashboard(props) {
             </div>
           </div>
         </div>
+
+        <div valgin="bottom" className={styles.navtab}>
+          <span className="material-icons" >
+            home
+          </span>
+          <span className="material-icons" >
+            leaderboard
+          </span>
+          <span className="material-icons" >
+            account_circle
+          </span>
+        </div>
+
       </div>
     </div>
   </div>);

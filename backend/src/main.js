@@ -98,6 +98,7 @@ app.post("/api/submitForm", Authorize, async (req, res) => {
     if (Object.keys(resposta.errors).length == 0) {
         const obj = {userData: {...req.body}}
         const update = await updateDoc(req.user, obj)
+        res.sendStatus(200)
         return update
     }
     else {
@@ -128,8 +129,20 @@ app.get("/api/name", Authorize, (req, res) => {
     res.status(200).json(req.user.userData.name)
 })
 
-app.get("/api/objective", (req, res) => {
-
+app.get("/api/objective", Authorize, async (req, res) => {
+    let obj = 0;
+    const normal = 35 * req.user.userData.weight
+    const imc = Math.round(req.user.userData.weight / ((req.user.userData.height / 100)**2))
+    if (imc > req.user.userData.age + 5) obj += 350
+    if (imc > req.user.userData.age - 5) obj -= 250
+    if (req.user.userData.sex == "masculino") obj += 250
+    if (req.user.userData.lifestyle == "ativo") obj += 350
+    if (req.user.userData.lifestyle == "sedentario") obj -= 250
+    if (req.user.userData.clima == "quente") obj += 250
+    if (req.user.userData.clima == "humido") obj += 250
+    const resposta = obj + normal
+    res.status(200).json(resposta)
+    return resposta
 })
 
 app.post("/api/post", (req, res) => {

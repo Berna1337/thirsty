@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './Thirsty.module.css'
+import { useNavigate } from 'react-router-dom';
 
 export const Formulario = (props) => {
 
@@ -15,6 +16,7 @@ export const Formulario = (props) => {
         clima: "temperado"
     })
 
+    const navigate = useNavigate()
     const [render, setRender] = useState(false)
 
     function handleSubmit(e) {
@@ -30,6 +32,9 @@ export const Formulario = (props) => {
                 },
                 body: JSON.stringify(submit)
             }).then(res => {
+                if (res.status == 200) {
+                    navigate("/dashboard")
+                }
                 return res.json()
             })
             .then(data => console.log(data))

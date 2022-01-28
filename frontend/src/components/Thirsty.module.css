@@ -8,6 +8,30 @@ body{
 	align-items: center;
 }
 
+.navbar {
+    overflow: hidden;
+    background-color: #333;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.navtab {
+    overflow: hidden;
+    background-color: white;
+    position: fixed;
+    border-radius: 40px 40px 0 0;
+    border: 4px solid #144FC6;
+    width: 242px;
+    height: fit-content;
+    justify-content: space-evenly;
+    display: flex;
+	align-items: center;
+    position: fixed;
+    bottom: 0;
+    padding: 42px;
+}
+
 .container {
     display: flex;
     flex-direction: row;
