@@ -124,6 +124,10 @@ app.get("/api/getWater", Authorize, async (req, res) => {
     res.status(200).json(resposta)
 })
 
+app.get("/api/name", Authorize, (req, res) => {
+    res.status(200).json(req.user.userData.name)
+})
+
 app.get("/api/objective", (req, res) => {
 
 })

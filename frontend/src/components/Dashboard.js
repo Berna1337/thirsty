@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './Thirsty.module.css'
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -6,10 +6,10 @@ export default function Dashboard(props) {
   
   const navigate = useNavigate()
   let token = props.token
-  let name = props.name
   console.log(token)
 
   const [water, setWater] = useState(0)
+  const [name, setName] = useState("")
 
   function addWater(quant) {
     fetch('/api/submitWater', {
@@ -25,6 +25,26 @@ export default function Dashboard(props) {
                     return 
                 }
                 return res.json()
+            })
+            .catch(error => console.log(error))
+  }
+
+  function getName() {
+    fetch('/api/name', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `${token}`
+                }
+            }).then(res => {
+                // if (res.status == 201) {
+                //     setWater(e => e + quant)
+                //     return 
+                // }
+                return res.json()
+            })
+            .then(data => {  
+              setName(data)
             })
             .catch(error => console.log(error))
   }
@@ -62,13 +82,19 @@ export default function Dashboard(props) {
                     console.log("aqui")
                     return
                 }
+                getName()
+                getWater()
                 return res.json()
             })
             .catch(error => console.log(error))
   }
 
-  checkProfile()
-  getWater()
+
+  useEffect(() => {
+    checkProfile()
+  }, []);
+  
+  
   
   return (<div>
     <div className={styles.form}>
@@ -76,7 +102,7 @@ export default function Dashboard(props) {
         <h1 className={styles.title}>Welcome {name},</h1>
 
         <h2 className={styles.subtitle}>Objetivo do dia:</h2>
-        <div>{water}</div>
+        <div>{water} / TBD</div>
 
 
         <h2 className={styles.subtitle}>Log your Water!</h2>

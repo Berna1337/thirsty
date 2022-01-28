@@ -52,7 +52,7 @@ function App() {
         <Route path="/signup" element={login ? <Dashboard token={userToken}/> : <SignupForm />} />
         <Route path="/login" element={login ? <Dashboard token={userToken}/> : <LoginForm />} />
         <Route path="/profile" element={login ? <Formulario token={userToken}/> : <LoginForm />} />
-        <Route path="/dashboard" element={login ? <Dashboard token={userToken} name="Berna"/> : <LoginForm />} />
+        <Route path="/dashboard" element={login ? <Dashboard token={userToken}/> : <LoginForm />} />
       </Routes>
     </BrowserRouter>
   );
