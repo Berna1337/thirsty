@@ -22,7 +22,7 @@ body{
     position: fixed;
     border-radius: 40px 40px 0 0;
     border: 4px solid white;
-    width: 242px;
+    width: 240px;
     height: fit-content;
     justify-content: space-evenly;
     display: flex;

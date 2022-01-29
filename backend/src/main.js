@@ -119,7 +119,7 @@ app.post("/api/submitWater", Authorize, async (req, res) => {
 })
 
 app.get("/api/getWater", Authorize, async (req, res) => {
-    const hoje = String(new Date()).slice(0, 15)
+    const hoje = formatDate(String(new Date()).slice(0, 15))
     const consumoDia = req.user.waterData.filter(e => e.date == hoje)
     const resposta = consumoDia.reduce((acc, e) => acc + e.value, 0)
     res.status(200).json(resposta)
@@ -166,6 +166,20 @@ async function Authorize(req, res, next) {
     if (!checkToken) res.status(403).json({ message: "Não existe nenhuma sessão com este token."})
     req.user = await findDocumentById(checkToken._id)
     next()
+}
+
+function formatDate(date) {
+    let d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [year, month, day].join('-');
 }
 
 function validateEmail(email) {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Thirsty.module.css'
 import { Link, useNavigate } from 'react-router-dom';
+import Navbar from './Navbar';
 
 export default function Dashboard(props) {
   
@@ -12,6 +13,20 @@ export default function Dashboard(props) {
   const [name, setName] = useState("")
   const [objective, setObjective] = useState(2300)
 
+  function formatDate(date) {
+    let d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+  }
+
   function addWater(quant) {
     fetch('/api/submitWater', {
                 method: 'POST',
@@ -19,7 +34,7 @@ export default function Dashboard(props) {
                     'Content-Type': 'application/json',
                     'Authorization': `${token}`
                 },
-                body: JSON.stringify({value: quant, date: String(new Date()).slice(0, 15)})
+                body: JSON.stringify({value: quant, date: formatDate(String(new Date()).slice(0, 15))})
             }).then(res => {
                 if (res.status == 201) {
                     setWater(e => e + quant)
@@ -144,19 +159,7 @@ export default function Dashboard(props) {
             </div>
           </div>
         </div>
-
-        <div valgin="bottom" className={styles.navtab}>
-          <span className="material-icons" >
-            home
-          </span>
-          <span className="material-icons" >
-            leaderboard
-          </span>
-          <span className="material-icons" >
-            account_circle
-          </span>
-        </div>
-
+        <Navbar />
       </div>
     </div>
   </div>);
