@@ -12,7 +12,7 @@ export default function Navbar() {
             <Link to="/stats" className={styles.nodecor}>leaderboard</Link>
         </span>
         <span className="material-icons" >
-            <Link to="/profile" className={styles.nodecor}>account_circle</Link>
+            <Link to="/account" className={styles.nodecor}>account_circle</Link>
         </span>
     </div>);
 }

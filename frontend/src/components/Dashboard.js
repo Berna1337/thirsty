@@ -7,7 +7,6 @@ export default function Dashboard(props) {
   
   const navigate = useNavigate()
   let token = props.token
-  console.log(token)
 
   const [water, setWater] = useState(0)
   const [name, setName] = useState("")

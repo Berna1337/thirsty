@@ -5,6 +5,7 @@ import { SignupForm } from './components/SignupForm';
 import Formulario from './components/UserData';
 import Dashboard from './components/Dashboard';
 import Stats from './components/Stats';
+import Account from './components/Account';
 
 function App() {
   
@@ -52,7 +53,7 @@ function App() {
   return (
     <BrowserRouter>
       <div>
-        {String(login)}
+
       </div>
       
       <Routes>
@@ -62,6 +63,7 @@ function App() {
         <Route path="/profile" element={login ? <Formulario token={userToken}/> : <LoginForm />} />
         <Route path="/dashboard" element={login ? <Dashboard token={userToken}/> : <LoginForm />} />
         <Route path="/stats" element={login ? <Stats token={userToken}/> : <LoginForm />} />
+        <Route path="/account" element={login ? <Account token={userToken}/> : <LoginForm />} />
       </Routes>
     </BrowserRouter>
   );

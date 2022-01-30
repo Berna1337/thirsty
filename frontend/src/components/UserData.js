@@ -6,7 +6,6 @@ export const Formulario = (props) => {
 
 
     let token = props.token
-    console.log(token)
     const [submit, setSubmit] = useState({
         name: "",
         age: "",
@@ -62,7 +61,7 @@ export const Formulario = (props) => {
                 if (res.status == 200) {
                     navigate("/dashboard")
                 }
-                return res.json()
+                return
             })
             .then(data => console.log(data))
             .catch(error => console.log(error))
@@ -241,7 +240,7 @@ export const Formulario = (props) => {
                 </select>
             </div>
 
-            <button type='submit' className={styles.submit}>Enviar</button>
+            <button type='submit' className={styles.submit}>Guardar</button>
         </div>
     </form>   
     )

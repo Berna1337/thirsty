@@ -186,6 +186,32 @@ body{
     opacity: 80%;
 }
 
+.logout{
+    width: 85%;
+    height: 60px;
+    padding: 10px;
+    color: white;
+    background-color: #B00020;
+    font-size: larger;
+    border-radius: 25px;
+    border: 0px solid #B00020;
+    margin: 1vw;
+    margin-top: 20px;
+    transition: opacity 0.8s;
+    cursor: pointer;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-bottom: 84px;
+}
+
+.logout:hover{
+    opacity: 80%;
+}
+
 .input {
     border: hidden;
     font-size: 16px;

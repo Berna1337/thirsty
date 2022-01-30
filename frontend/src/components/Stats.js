@@ -9,7 +9,6 @@ export default function Stats(props) {
 
 
   let token = props.token
-  console.log(token)
 
   useEffect(() => {
     getWaterStats()

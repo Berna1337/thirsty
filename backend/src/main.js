@@ -161,6 +161,12 @@ app.get("/api/objective", Authorize, async (req, res) => {
     return resposta
 })
 
+app.post("/logout",Authorize, async (req, res) => {
+    const logout = await handleSessions(req.user.email)
+    res.sendStatus(200)
+    return logout
+})
+
 app.post("/api/post", (req, res) => {
 
 })
