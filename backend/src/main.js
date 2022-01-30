@@ -118,11 +118,27 @@ app.post("/api/submitWater", Authorize, async (req, res) => {
     return pushWater
 })
 
+app.post("/api/submitWaterDay", Authorize, async (req, res) => {
+    const arr = req.user.waterDay.filter(e => e.day != req.body.day)
+    arr.push(req.body)
+    const obj = {waterDay: {...req.body}}
+    const pushWater = await updateDoc(req.user, {waterDay: arr})
+    res.sendStatus(201)
+    return pushWater
+})
+
 app.get("/api/getWater", Authorize, async (req, res) => {
     const hoje = formatDate(String(new Date()).slice(0, 15))
-    const consumoDia = req.user.waterData.filter(e => e.date == hoje)
+    const consumoDia = req.user.waterData.filter(e => e.day == hoje)
     const resposta = consumoDia.reduce((acc, e) => acc + e.value, 0)
+    console.log(consumoDia)
     res.status(200).json(resposta)
+})
+
+app.get("/api/getWaterStats", Authorize, async (req, res) => {
+    // const hoje = formatDate(String(new Date()).slice(0, 15))
+    // const consumoSemana = req.user.waterDay//.filter(e => new Date(e.day).valueOf() >= (new Date(hoje).valueOf() - (86400000 * 7)))
+    res.status(200).json(req.user.waterDay)
 })
 
 app.get("/api/name", Authorize, (req, res) => {

@@ -34,13 +34,27 @@ export default function Dashboard(props) {
                     'Content-Type': 'application/json',
                     'Authorization': `${token}`
                 },
-                body: JSON.stringify({value: quant, date: formatDate(String(new Date()).slice(0, 15))})
+                body: JSON.stringify({value: quant, day: formatDate(String(new Date()).slice(0, 15))})
             }).then(res => {
                 if (res.status == 201) {
                     setWater(e => e + quant)
                     return 
                 }
                 return res.json()
+            })
+            .catch(error => console.log(error))
+  }
+
+  function addWaterDay(quant) {
+    fetch('/api/submitWaterDay', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `${token}`
+                },
+                body: JSON.stringify({value: quant, day: formatDate(String(new Date()).slice(0, 15))})
+            }).then(res => {
+                return
             })
             .catch(error => console.log(error))
   }
@@ -128,7 +142,10 @@ export default function Dashboard(props) {
 
   useEffect(() => {
     checkProfile()
-  }, []);
+    if (water > 0) addWaterDay(water)
+    
+    
+  }, [water]);
   
   
   

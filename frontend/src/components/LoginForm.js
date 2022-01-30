@@ -87,7 +87,6 @@ export function LoginForm() {
                         <div className={styles.sub}>Ainda não tem conta? <Link to="/signup" className={styles.nodecor}>Clique aqui</Link>!</div>
                     </div>
                 </div>
-                
             </form>
         </div>
     )
