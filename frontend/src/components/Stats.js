@@ -96,6 +96,8 @@ export default function Stats(props) {
         <div>
             <div className={styles.form}>
               <div className={styles.main}>
+                <h1 className={styles.title2}>Stats</h1>
+                <h2 className={styles.legend}>Últimos 90 dias</h2>
                 <div className={styles.stats}>
                   <ResponsiveTimeRange
                     data={data}
@@ -104,7 +106,7 @@ export default function Stats(props) {
                     direction='vertical'
                     emptyColor="#eeeeee"
                     colors={[ "#eeeeee", '#00FFFF', '#00EFFF', '#00CBFF', '#00A3FF', '#008CFF' ]}
-                    margin={{ top: -75, right: 0, bottom: 80, left: 0 }}
+                    margin={{ top: -75, right: 0, bottom: -24, left: 0 }}
                     dayBorderWidth={2}
                     dayBorderColor="#ffffff"
                     weekdayTicks={[]}

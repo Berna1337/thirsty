@@ -43,7 +43,7 @@ function App() {
     setInterval(() => {
       const userToken = tokenFromLocal()
       checkAuth(userToken)
-  }, 4224);
+  }, 2424);
     
   }, []);
   

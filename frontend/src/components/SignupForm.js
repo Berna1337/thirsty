@@ -12,6 +12,7 @@ export function SignupForm () {
     passwordConfirmation: '',
     acceptsTerms: false,
     waterData: [],
+    waterDay: [],
     userData: "",
     objective: [],
     achievements: [],

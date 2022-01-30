@@ -63,10 +63,7 @@ export const Formulario = (props) => {
                 }
                 return
             })
-            .then(data => console.log(data))
             .catch(error => console.log(error))
-            
-            console.log(submit)
         }
         else {
             setRender(true)

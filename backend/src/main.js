@@ -119,9 +119,9 @@ app.post("/api/submitWater", Authorize, async (req, res) => {
 })
 
 app.post("/api/submitWaterDay", Authorize, async (req, res) => {
-    const arr = req.user.waterDay.filter(e => e.day != req.body.day)
+    let arr = req.user.waterDay.filter(e => e.day != req.body.day)
     arr.push(req.body)
-    const obj = {waterDay: {...req.body}}
+    // const obj = {waterDay: {...req.body}}
     const pushWater = await updateDoc(req.user, {waterDay: arr})
     res.sendStatus(201)
     return pushWater

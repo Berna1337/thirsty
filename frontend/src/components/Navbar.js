@@ -6,13 +6,13 @@ export default function Navbar() {
   return (
     <div valgin="bottom" className={styles.navtab}>
         <span className="material-icons" >
-            <Link to="/dashboard" className={styles.nodecor}>home</Link>
+            <Link to="/dashboard" className={styles.navicons}>home</Link>
         </span>
         <span className="material-icons" >
-            <Link to="/stats" className={styles.nodecor}>leaderboard</Link>
+            <Link to="/stats" className={styles.navicons}>leaderboard</Link>
         </span>
         <span className="material-icons" >
-            <Link to="/account" className={styles.nodecor}>account_circle</Link>
+            <Link to="/account" className={styles.navicons}>account_circle</Link>
         </span>
     </div>);
 }

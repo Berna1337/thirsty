@@ -154,7 +154,7 @@ export default function Dashboard(props) {
         <h1 className={styles.title}>Welcome {name},</h1>
 
         <h2 className={styles.subtitle}>Objetivo do dia:</h2>
-        <div>{water}ml / {objective}ml</div>
+        <div className={styles.field}>{water}ml / {objective}ml</div>
 
 
         <h2 className={styles.subtitle}>Log your Water!</h2>
