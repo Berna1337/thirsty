@@ -1,4 +1,5 @@
 import { Component } from "react";
+import styles from './Thirsty.module.css'
 
 class InApp extends Component {
     constructor(props) {
@@ -7,8 +8,10 @@ class InApp extends Component {
     state = {  }
     render() { 
         return (  
-            <div>
-                <p>{this.props.text}</p>
+            <div className={styles.container2}>
+                <div className={styles.rectangle}>
+                    <p className={styles.notificationtext}>{this.props.text}</p>
+                </div>
             </div>
         );
     }

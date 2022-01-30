@@ -48,7 +48,7 @@ const navigate = useNavigate()
                     setNoti("Conta criada com sucesso!")
                     setTimeout(() => {
                         navigate("/login")
-                    }, 10000);   
+                    }, 2424);   
                 }
                 return res.json()
             })
@@ -171,7 +171,7 @@ const navigate = useNavigate()
                     </div>
                 </div>
             </form>
-            {notificacao && <InApp text = {notificacao}></InApp> }
+            {/* {notificacao && <InApp text = {notificacao}></InApp> } */}
         </div>
     )
 }
