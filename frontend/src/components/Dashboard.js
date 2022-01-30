@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './Thirsty.module.css'
 import { Link, useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
+import bottle from "../bottle.png"
 
 export default function Dashboard(props) {
   
@@ -10,7 +11,7 @@ export default function Dashboard(props) {
 
   const [water, setWater] = useState(0)
   const [name, setName] = useState("")
-  const [objective, setObjective] = useState(2300)
+  const [objective, setObjective] = useState(2350)
 
   function formatDate(date) {
     let d = new Date(date),

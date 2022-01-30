@@ -8,6 +8,11 @@ body{
 	align-items: center;
 }
 
+.bottle {
+    height: 125px;
+    width: 125px;
+}
+
 .container2 {
 	display: flex;
 	height: 100%;
@@ -19,7 +24,7 @@ body{
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
-	positon: relative;
+	position: relative;
 	width: 50px;
 	height: 50px;
 	background: #380848;

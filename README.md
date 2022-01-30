@@ -2,47 +2,54 @@
 
 Web app para incentivar ao consumo de água.
 
-## Requisitos Funcionais:
+## Requesitos:
+1. Node.js (https://nodejs.org/en/)
 
-    Visitante:
-    -Deve ser possivel fazer Login/Registar.
+2. MongoDB (https://www.mongodb.com/try/download/community)
 
-    Utilizador:
-    -Deve ser possivel após o registo responder a um formulário de forma a proporcionar uma experiência personalizada;
+3. Git (https://git-scm.com/downloads)
 
-    -Deve ser possivel registar a ingestão de liquidos;
+## Como usar?
+Após validação dos requesitos acima:
 
-    -Deve ser possivel verificar os dados de ingestão de liquidos;
+1. O primeiro passo é clonar o repositorio do projeto através do comando:
 
-    -Deve ser possivel ter um objetivo novo para cada dia com base no estilo de vida do cliente e dos dados anteriores;
-
-    -Deve ser possivel ganhar medalhas por completar objetivos;
-
-    -Deve ser possivel ver as medalhas que se podem ganhar por completar desafios e o progresso para as mesmas;
-
-    -Deve ser possivel fazer posts na área de discussões;
-
-    -Deve ser possivel receber notificações;
-
-    -Deve ser possivel aceder aos dados recolhidos;
-
-    -Deve ser possivel eliminar a conta;
-
-    -Deve ser possivel se tornar premium.
-
-    Cliente:
-    -Deve ser possivel possivel participar Torneios entre utilizadores disponiveis apenas para utilizadores premium;
-
-    -Deve ser possivel obter badges exclusivos de supporter e de torneios;
-
-    -Deve ser possivel garantir que os posts dos utilizadores premium têm maior viziblidade.
+```git clone https://github.com/Berna1337/thirsty.git```
 
 
 
-## Requisitos Não Funcionais:
-    -Mobile first;
+2. Acedemos à pasta do repositório responsavel pelo frontend atraves do comando:
 
-    -Deve ser possivel aceder à web app pelo desktop para consultar as estatisticas.
+```cd Thirsty/frontend/```
 
-## Requesitos de Negocio:
-    -Deve ser possivel utilizar os metodos de pagamento digitais mais populares.
+
+
+3. Instalamos as dependencias do Frontend com o comando:
+
+```npm install```
+
+4. De seguida podemos utilizar o seguinte comando para iniciar o frontend:
+
+```npm start```
+
+5. Temos de instalar as dependencias do backend, para isso teremos de aceder à pasta do backend:
+
+```cd ..```
+
+```cd backend/```
+
+6. Instalamos as dependencias do backend através do comando:
+
+```npm install```
+
+7. Podemos iniciar o backend após a instalação das dependencias de duas formas:
+
+```npm run start```
+
+ou
+
+```npm run start:nodemon``` (dev mode)
+
+8. Aceder a http://localhost:3000 pelo browser(porta pode ser modificada no código)
+
+por defeito o Frontend irá correr na porta ```3000``` e o backend na porta ```3025```

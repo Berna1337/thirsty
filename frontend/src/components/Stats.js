@@ -6,16 +6,34 @@ import Navbar from './Navbar';
 export default function Stats(props) {
     
   const [data, setData] = useState([])
-
+  const [objective, setObjective] = useState(2350)
 
   let token = props.token
 
   useEffect(() => {
     getWaterStats()
-  
+    getObjective()
   }, []);
 
-  
+  function getObjective() {
+    fetch('/api/objective', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `${token}`
+                }
+            }).then(res => {
+                // if (res.status == 201) {
+                //     setWater(e => e + quant)
+                //     return 
+                // }
+                return res.json()
+            })
+            .then(data => {  
+              setObjective(data)
+            })
+            .catch(error => console.log(error))
+  }
   
   function formatDate(date) {
     let d = new Date(date),
@@ -103,9 +121,10 @@ export default function Stats(props) {
                     data={data}
                     from={new Date(new Date().valueOf() - 86400000 * 90)}
                     to={formatDate(String(new Date(new Date().valueOf() + 86400000)).slice(0, 15))}
+                    maxValue={objective}
                     direction='vertical'
                     emptyColor="#eeeeee"
-                    colors={[ "#eeeeee", '#00FFFF', '#00EFFF', '#00CBFF', '#00A3FF', '#008CFF' ]}
+                    colors={[ "#eeeeee", '#00FFFF', '#00EFFF', '#00CBFF', '#00B8FF', '#008CFF' ]}
                     margin={{ top: -75, right: 0, bottom: -24, left: 0 }}
                     dayBorderWidth={2}
                     dayBorderColor="#ffffff"
