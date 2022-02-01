@@ -101,7 +101,7 @@ body{
     cursor: pointer;
 }
 
-.cup:focus{
+.cup:hover{
     opacity: 80%;
 }
 
