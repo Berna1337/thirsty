@@ -3,7 +3,7 @@ import styles from './Thirsty.module.css'
 import thirsty from "../Thirsty.png"
 import { Link, useNavigate } from 'react-router-dom';
 
-export function LoginForm() {
+export function LoginForm({ setLogin }) {
     const [submit, setSubmit] = useState({
         email: "",
         password: ""
@@ -34,6 +34,7 @@ export function LoginForm() {
             .then(data => {
                 console.log(data)
                 localStorage.setItem("token", data.token)
+                setLogin(true)
                 // setTimeout(() => {
                 //         navigate("/profile")
                 //     }, 1000);  

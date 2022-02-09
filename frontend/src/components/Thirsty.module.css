@@ -50,6 +50,10 @@ body{
     height: 80vh;
     width: 278px;
     cursor: pointer;
+    /* transform: rotate(-180deg); */
+    /* scale: 1.5; */
+    margin-bottom: -30px;
+    margin-top: -80px;
 }
 
 .navbar {

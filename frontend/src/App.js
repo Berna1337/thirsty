@@ -40,12 +40,12 @@ function App() {
 
   useEffect(() => {
     checkAuth(userToken)
-    setInterval(() => {
-      const userToken = tokenFromLocal()
-      checkAuth(userToken)
-  }, 2424);
+  //   setInterval(() => {
+  //     const userToken = tokenFromLocal()
+  //     checkAuth(userToken)
+  // }, 2424);
     
-  }, []);
+  }, [login]);
   
 
   
@@ -57,13 +57,13 @@ function App() {
       </div>
       
       <Routes>
-        <Route exact path="/" element={login ? <Dashboard token={userToken}/> : <LoginForm />} />
-        <Route path="/signup" element={login ? <Dashboard token={userToken}/> : <SignupForm />} />
-        <Route path="/login" element={login ? <Dashboard token={userToken}/> : <LoginForm />} />
-        <Route path="/profile" element={login ? <Formulario token={userToken}/> : <LoginForm />} />
-        <Route path="/dashboard" element={login ? <Dashboard token={userToken}/> : <LoginForm />} />
-        <Route path="/stats" element={login ? <Stats token={userToken}/> : <LoginForm />} />
-        <Route path="/account" element={login ? <Account token={userToken}/> : <LoginForm />} />
+        <Route exact path="/" element={login ? <Dashboard setLogin={setLogin}/> : <LoginForm setLogin={setLogin} />} />
+        <Route path="/signup" element={login ? <Dashboard setLogin={setLogin}/> : <SignupForm />} />
+        <Route path="/login" element={login ? <Dashboard setLogin={setLogin}/> : <LoginForm setLogin={setLogin} />} />
+        <Route path="/profile" element={login ? <Formulario setLogin={setLogin}/> : <LoginForm setLogin={setLogin} />} />
+        <Route path="/dashboard" element={login ? <Dashboard setLogin={setLogin} /> : <LoginForm setLogin={setLogin} />} />
+        <Route path="/stats" element={login ? <Stats setLogin={setLogin}/> : <LoginForm setLogin={setLogin} />} />
+        <Route path="/account" element={login ? <Account setLogin={setLogin} /> : <LoginForm setLogin={setLogin} />} />
       </Routes>
     </BrowserRouter>
   );

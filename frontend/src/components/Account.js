@@ -4,18 +4,19 @@ import styles from './Thirsty.module.css'
 
 export default function Account(props) {
     
-    let token = props.token
+    localStorage.getItem("token")
 
     function logout() {
         fetch('/logout', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `${token}`
+                'Authorization': `${localStorage.getItem("token")}`
             },
         }).then(res => {
             if (res.status == 200) {
                 localStorage.clear()
+                props.setLogin(false)
                 return 
             }
             return
@@ -25,7 +26,7 @@ export default function Account(props) {
     
     return (
         <div>
-            <Formulario token={token}/>
+            <Formulario {...props}/>
             <button type='button' className={styles.logout} onClick={() => logout()}>Logout</button>
         </div>);
 }

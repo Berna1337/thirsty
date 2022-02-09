@@ -185,7 +185,10 @@ app.delete("/api/delete", (req, res) => {
 
 async function Authorize(req, res, next) {
     const checkToken = await findSessionByToken(req.headers.authorization)
-    if (!checkToken) res.status(403).json({ message: "Não existe nenhuma sessão com este token."})
+    if (!checkToken) {
+        res.status(403).json({ message: "Não existe nenhuma sessão com este token."})
+        return
+    }
     req.user = await findDocumentById(checkToken._id)
     next()
 }

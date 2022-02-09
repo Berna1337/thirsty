@@ -7,7 +7,6 @@ import bottle from "../bottle.png"
 export default function Dashboard(props) {
   
   const navigate = useNavigate()
-  let token = props.token
 
   const [water, setWater] = useState(0)
   const [name, setName] = useState("")
@@ -32,7 +31,7 @@ export default function Dashboard(props) {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `${token}`
+                    'Authorization': `${localStorage.getItem("token")}`
                 },
                 body: JSON.stringify({value: quant, day: formatDate(String(new Date()).slice(0, 15))})
             }).then(res => {
@@ -50,7 +49,7 @@ export default function Dashboard(props) {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `${token}`
+                    'Authorization': `${localStorage.getItem("token")}`
                 },
                 body: JSON.stringify({value: quant, day: formatDate(String(new Date()).slice(0, 15))})
             }).then(res => {
@@ -64,7 +63,7 @@ export default function Dashboard(props) {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `${token}`
+                    'Authorization': `${localStorage.getItem("token")}`
                 }
             }).then(res => {
                 // if (res.status == 201) {
@@ -84,7 +83,7 @@ export default function Dashboard(props) {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `${token}`
+                    'Authorization': `${localStorage.getItem("token")}`
                 }
             }).then(res => {
                 // if (res.status == 201) {
@@ -104,13 +103,13 @@ export default function Dashboard(props) {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `${token}`
+                    'Authorization': `${localStorage.getItem("token")}`
                 }
             }).then(res => {
-                // if (res.status == 201) {
-                //     setWater(e => e + quant)
-                //     return 
-                // }
+                if (res.status == 403) {
+                    props.setLogin(false)
+                    return
+                }
                 return res.json()
             })
             .then(data => {
@@ -124,11 +123,15 @@ export default function Dashboard(props) {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `${token}`
+                    'Authorization': `${localStorage.getItem("token")}`
                 }
             }).then(res => {
                 if (res.status == 404) {
                     navigate("/profile")
+                    return
+                }
+                if (res.status == 403) {
+                    props.setLogin(false)
                     return
                 }
                 getName()

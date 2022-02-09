@@ -4,8 +4,6 @@ import { useNavigate } from 'react-router-dom';
 
 export const Formulario = (props) => {
 
-
-    let token = props.token
     const [submit, setSubmit] = useState({
         name: "",
         age: "",
@@ -29,10 +27,14 @@ export const Formulario = (props) => {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `${token}`
+                    'Authorization': `${localStorage.getItem("token")}`
                 }
             }).then(res => {
                 if (res.status == 404) {
+                    return
+                }
+                if (res.status == 403) {
+                    props.setLogin(false)
                     return
                 }
                 return res.json()
@@ -54,12 +56,16 @@ export const Formulario = (props) => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `${token}`
+                    'Authorization': `${localStorage.getItem("token")}`
                 },
                 body: JSON.stringify(submit)
             }).then(res => {
                 if (res.status == 200) {
                     navigate("/dashboard")
+                }
+                if (res.status == 403) {
+                    props.setLogin(false)
+                    return
                 }
                 return
             })
