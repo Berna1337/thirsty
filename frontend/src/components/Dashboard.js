@@ -39,6 +39,10 @@ export default function Dashboard(props) {
                     setWater(e => e + quant)
                     return 
                 }
+                if (res.status == 403) {
+                    props.setLogin(false)
+                    return
+                }
                 return res.json()
             })
             .catch(error => console.log(error))
@@ -53,7 +57,11 @@ export default function Dashboard(props) {
                 },
                 body: JSON.stringify({value: quant, day: formatDate(String(new Date()).slice(0, 15))})
             }).then(res => {
+              if (res.status == 403) {
+                props.setLogin(false)
                 return
+              }  
+              return
             })
             .catch(error => console.log(error))
   }
@@ -66,10 +74,10 @@ export default function Dashboard(props) {
                     'Authorization': `${localStorage.getItem("token")}`
                 }
             }).then(res => {
-                // if (res.status == 201) {
-                //     setWater(e => e + quant)
-                //     return 
-                // }
+                if (res.status == 403) {
+                    props.setLogin(false)
+                    return
+                }
                 return res.json()
             })
             .then(data => {  
@@ -86,10 +94,10 @@ export default function Dashboard(props) {
                     'Authorization': `${localStorage.getItem("token")}`
                 }
             }).then(res => {
-                // if (res.status == 201) {
-                //     setWater(e => e + quant)
-                //     return 
-                // }
+                if (res.status == 403) {
+                    props.setLogin(false)
+                    return
+                }
                 return res.json()
             })
             .then(data => {  
