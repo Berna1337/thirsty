@@ -40,11 +40,6 @@ function App() {
 
   useEffect(() => {
     checkAuth(userToken)
-  //   setInterval(() => {
-  //     const userToken = tokenFromLocal()
-  //     checkAuth(userToken)
-  // }, 2424);
-    
   }, [login]);
   
 
@@ -52,10 +47,6 @@ function App() {
   
   return (
     <BrowserRouter>
-      <div>
-
-      </div>
-      
       <Routes>
         <Route exact path="/" element={login ? <Dashboard setLogin={setLogin}/> : <LoginForm setLogin={setLogin} />} />
         <Route path="/signup" element={login ? <Dashboard setLogin={setLogin}/> : <SignupForm />} />
