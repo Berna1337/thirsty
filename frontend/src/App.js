@@ -10,17 +10,12 @@ import Account from './components/Account';
 function App() {
   
   const [login, setLogin] = useState(false)
-  
-  function tokenFromLocal() {
-    const token = localStorage.getItem("token")
-    return token;
-  }
 
-  function checkAuth(token) {
+  function checkAuth() {
     fetch('/user', {
       method: 'GET',
       headers: {
-      'Authorization': `${token}`
+      'Authorization': `${localStorage.getItem("token")}`
       },
     }).then(res => {
       if (res.status == 200) {
@@ -34,16 +29,10 @@ function App() {
     })
     .catch(error => console.log(error))
   }
-  
-  const userToken = tokenFromLocal()
-  
 
   useEffect(() => {
-    checkAuth(userToken)
+    checkAuth()
   }, [login]);
-  
-
-  
   
   return (
     <BrowserRouter>
