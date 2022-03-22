@@ -6,6 +6,7 @@ import Formulario from './components/UserData';
 import Dashboard from './components/Dashboard';
 import Stats from './components/Stats';
 import Account from './components/Account';
+import Feed from './components/Feed';
 
 function App() {
   
@@ -44,6 +45,7 @@ function App() {
         <Route path="/dashboard" element={login ? <Dashboard setLogin={setLogin} /> : <LoginForm setLogin={setLogin} />} />
         <Route path="/stats" element={login ? <Stats setLogin={setLogin}/> : <LoginForm setLogin={setLogin} />} />
         <Route path="/account" element={login ? <Account setLogin={setLogin} /> : <LoginForm setLogin={setLogin} />} />
+        <Route path="/feed" element={login ? <Feed setLogin={setLogin} /> : <LoginForm setLogin={setLogin} />} />
       </Routes>
     </BrowserRouter>
   );

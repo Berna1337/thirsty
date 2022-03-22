@@ -1,6 +1,6 @@
 # Thirsty
 
-Web app para incentivar ao consumo de água.
+Web app para incentivar ao consumo de água. (mobile-only for now)
 
 ## Requesitos:
 1. Node.js (https://nodejs.org/en/)

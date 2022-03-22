@@ -12,6 +12,9 @@ export default function Navbar() {
             <Link to="/stats" className={styles.navicons}>leaderboard</Link>
         </span>
         <span className="material-icons" >
+            <Link to="/feed" className={styles.navicons}>public</Link>
+        </span>
+        <span className="material-icons" >
             <Link to="/account" className={styles.navicons}>account_circle</Link>
         </span>
     </div>);
